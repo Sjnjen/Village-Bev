@@ -1,1270 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KingD Lux Balloons - Luxury Decorations</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --silver: #C0C0C0;
-            --black: #000000;
-            --pink: #FF9EC3;
-            --gold: #D4AF37;
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--black);
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: rgba(0, 0, 0, 0.9);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo img {
-            height: 50px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--silver);
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: var(--silver);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            font-size: 16px;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: var(--transition);
-        }
-        
-        nav ul li a:hover {
-            color: var(--gold);
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        .whatsapp-btn {
-            background: linear-gradient(135deg, var(--silver), var(--gold));
-            color: var(--black);
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            margin-left: 20px;
-            animation: pulse 2s infinite;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            animation: fadeInDown 1s ease-out;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-weight: 300;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-        
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-            animation: fadeIn 1s ease-out 1s both;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--silver));
-            color: var(--black);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background-color: white;
-            color: var(--black);
-            transform: translateY(-3px);
-        }
-        
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            animation: float 5s ease-in-out infinite;
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Packages Section */
-        .packages {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, var(--silver), var(--gold));
-        }
-        
-        .section-title p {
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .package-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-        
-        .package-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--silver), var(--gold));
-            color: var(--black);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            animation: pulse 2s infinite;
-        }
-        
-        .package-header {
-            padding: 30px;
-            text-align: center;
-            color: white;
-        }
-        
-        .basic-header {
-            background: linear-gradient(135deg, #6c757d, #495057);
-        }
-        
-        .silver-header {
-            background: linear-gradient(135deg, var(--silver), #8e9eab);
-        }
-        
-        .gold-header {
-            background: linear-gradient(135deg, var(--gold), #b8860b);
-        }
-        
-        .pink-header {
-            background: linear-gradient(135deg, #ff9ec3, #ff7eb3);
-        }
-        
-        .purple-header {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-        }
-        
-        .package-header h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .package-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-        
-        .package-features {
-            padding: 30px;
-        }
-        
-        .package-features ul {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        
-        .package-features ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-        }
-        
-        .package-features ul li i {
-            color: var(--gold);
-            margin-right: 10px;
-        }
-        
-        .package-cta {
-            text-align: center;
-            padding: 0 30px 30px;
-        }
-        
-        .package-note {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .package-note h4 {
-            color: var(--black);
-            margin-bottom: 10px;
-        }
-        
-        /* Luxury Packages Section */
-        .luxury-packages {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-        
-        .luxury-package-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-            transition: var(--transition);
-        }
-        
-        .luxury-package-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .luxury-package-header {
-            padding: 25px 30px;
-            text-align: center;
-            color: white;
-        }
-        
-        .luxury-basic {
-            background: linear-gradient(135deg, #6c757d, #495057);
-        }
-        
-        .luxury-silver {
-            background: linear-gradient(135deg, var(--silver), #8e9eab);
-        }
-        
-        .luxury-gold {
-            background: linear-gradient(135deg, var(--gold), #b8860b);
-        }
-        
-        .luxury-package-header h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .luxury-package-price {
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-        
-        .luxury-package-features {
-            padding: 25px 30px;
-        }
-        
-        .luxury-package-features ul {
-            list-style: none;
-        }
-        
-        .luxury-package-features ul li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-        }
-        
-        .luxury-package-features ul li i {
-            color: var(--gold);
-            margin-right: 12px;
-            min-width: 20px;
-        }
-        
-        .luxury-package-cta {
-            text-align: center;
-            padding: 0 30px 30px;
-        }
-        
-        /* Add-ons Section */
-        .addons {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .addons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .addon-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: var(--transition);
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        .addon-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .addon-card i {
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        
-        .addon-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--black);
-        }
-        
-        .addon-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .addon-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--black);
-        }
-        
-        /* Booking Process */
-        .booking-process {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-        
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .step {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--silver), var(--gold));
-            color: var(--black);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--black);
-        }
-        
-        .step p {
-            color: #666;
-        }
-        
-        /* Notice Section */
-        .notice {
-            padding: 50px 0;
-            background: linear-gradient(135deg, var(--black), #2c2c2c);
-            color: white;
-            text-align: center;
-        }
-        
-        .notice-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            animation: pulse 3s infinite;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-        }
-        
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .cta-content h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--black);
-            color: white;
-            padding: 70px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-column h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        
-        .footer-column p, .footer-column li {
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li a {
-            color: white;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--gold);
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            background-color: var(--gold);
-            color: var(--black);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #999;
-        }
-        
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            transition: var(--transition);
-            animation: pulse 2s infinite;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
-        }
-        
-        /* Animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInDown {
-            from { 
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .packages-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-            
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--black);
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn {
-                justify-content: center;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .package-header h3 {
-                font-size: 1.5rem;
-            }
-            
-            .package-price {
-                font-size: 2rem;
-            }
-            
-            .process-steps, .addons-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .cta-content h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Village Bev | Purple Haze • Drinks & Party Hub</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Leaflet CSS for map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #faf5ff 0%, #f0e9ff 100%);
+      color: #1e1a2f;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #e9e0fc; }
+    ::-webkit-scrollbar-thumb { background: #9b7bdf; border-radius: 10px; }
+
+    /* LOADING SCREEN */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(45, 35, 75, 0.98);
+      backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .loading-spinner {
+      width: 70px;
+      height: 70px;
+      border: 5px solid rgba(156, 112, 220, 0.3);
+      border-top-color: #c084fc;
+      border-radius: 50%;
+      animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-text {
+      color: #e0b0ff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      animation: pulse 1.5s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; text-shadow: 0 0 8px #b77eff; }
+    }
+    .loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* SECTION STYLES */
+    .section-container {
+      min-height: 100vh;
+      padding: 100px 0 80px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      scroll-margin-top: 80px;
+    }
+    .section-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* HEADER WITH MENU BUTTON */
+    header {
+      background: rgba(45, 35, 75, 0.95);
+      backdrop-filter: blur(12px);
+      color: white;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+    }
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e0b0ff, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .logo span {
+      font-size: 0.75rem;
+      color: #cdc2f0;
+    }
+
+    /* MENU BUTTON + SIDEBAR */
+    .menu-btn {
+      background: rgba(156, 112, 220, 0.3);
+      border: 1px solid #c084fc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.2s;
+    }
+    .menu-btn:hover {
+      background: #7c4dff;
+      transform: scale(1.02);
+    }
+    .sidebar-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: rgba(30, 25, 55, 0.98);
+      backdrop-filter: blur(16px);
+      z-index: 1100;
+      transition: right 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      padding: 100px 24px 40px;
+      box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+      border-left: 1px solid #c084fc;
+    }
+    .sidebar-menu.open {
+      right: 0;
+    }
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      color: #f0eaff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-bottom: 1px solid rgba(192, 132, 252, 0.2);
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .sidebar-menu a:hover {
+      color: #e0b0ff;
+      padding-left: 12px;
+    }
+    .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #e0b0ff;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 32px;
+      padding-left: 20px;
+      border-left: 6px solid #a974f3;
+      color: #2e2548;
+    }
+    .section-title i {
+      color: #b77eff;
+      margin-right: 12px;
+    }
+
+    /* product cards */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 32px;
+      padding: 20px;
+      box-shadow: 0 15px 30px rgba(98, 56, 148, 0.08);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(156, 112, 220, 0.2);
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 35px rgba(98, 56, 148, 0.15);
+      border-color: #c5a3ff;
+    }
+    .product-cat {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: #ede5ff;
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 40px;
+      color: #5b3b8c;
+    }
+    .product-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 12px 0 4px;
+      color: #2b1f44;
+    }
+    .size-select {
+      margin: 12px 0;
+      padding: 8px;
+      border-radius: 28px;
+      border: 1px solid #d9c8ff;
+      background: #faf7ff;
+      font-size: 0.8rem;
+      width: 100%;
+    }
+    .btn {
+      background: #7c4dff;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: #6339d4;
+      transform: scale(1.02);
+    }
+
+    .cat-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .cat-btn {
+      background: #ede4ff;
+      border: none;
+      padding: 8px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #3c2c62;
+    }
+    .cat-btn.active, .cat-btn:hover {
+      background: #8a65e0;
+      color: white;
+    }
+
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      background: rgba(255, 252, 255, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 48px;
+      padding: 30px;
+      justify-content: space-between;
+    }
+    .info-box {
+      flex: 1;
+      min-width: 180px;
+      background: white;
+      border-radius: 32px;
+      padding: 22px;
+      text-align: center;
+    }
+    .info-box i {
+      font-size: 2rem;
+      color: #916cf0;
+    }
+    .badge-cod {
+      background: #4f3a7c;
+      padding: 5px 12px;
+      border-radius: 30px;
+      color: white;
+      font-size: 0.7rem;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .events-showcase {
+      background: rgba(255, 247, 255, 0.8);
+      border-radius: 56px;
+      padding: 32px;
+      border: 1px solid #cfbaff;
+    }
+    .featured-event {
+      background: linear-gradient(115deg, #2b2348, #1f193a);
+      border-radius: 36px;
+      padding: 24px;
+      color: white;
+      margin-bottom: 32px;
+    }
+    .event-img {
+      width: 100%;
+      border-radius: 28px;
+      margin: 20px 0;
+      max-height: 280px;
+      object-fit: cover;
+    }
+    .video-grid, .photo-gallery-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .video-card {
+      background: #1e1935;
+      border-radius: 24px;
+      overflow: hidden;
+      width: 180px;
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 110px;
+      border: none;
+    }
+    .gallery-thumb {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 2px solid #d3befa;
+    }
+    .map-container {
+      height: 360px;
+      width: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .cart-side {
+      background: white;
+      border-radius: 40px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(98, 56, 148, 0.1);
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ede3ff;
+      padding: 12px 0;
+    }
+    footer {
+      background: #18132f;
+      color: #c9bcff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    @media (max-width: 780px) {
+      .container { padding: 0 20px; }
+      .section-title { font-size: 1.6rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container header-content">
-            <a href="#" class="logo">
-                <img src="kingD.jpg" alt="KingD Lux Balloons Logo">
-            </a>
-            <button class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#packages">Packages</a></li>
-                    <li><a href="#luxury-packages">Luxury Room</a></li>
-                    <li><a href="#addons">Add-Ons</a></li>
-                    <li><a href="#booking">Booking</a></li>
-                    <li><a href="https://wa.me/27810468068" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
-                </ul>
-            </nav>
+
+<div id="globalLoader" class="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">VILLAGE BEV • LOADING VIBES</div>
+</div>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <h1>🍇 VILLAGE BEV</h1>
+        <span>Purple Haze • Venda's #1</span>
+      </div>
+      <div class="menu-btn" id="menuButton">
+        <i class="fas fa-bars"></i> MENU
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Sidebar Menu -->
+<div class="overlay" id="overlay"></div>
+<div class="sidebar-menu" id="sidebarMenu">
+  <div class="close-menu" id="closeMenu">&times;</div>
+  <a onclick="scrollToSection('drinks-section'); closeSidebar();"><i class="fas fa-wine-bottle"></i> Drinks</a>
+  <a onclick="scrollToSection('party-section'); closeSidebar();"><i class="fas fa-glass-cheers"></i> Party Zone</a>
+  <a onclick="scrollToSection('location-section'); closeSidebar();"><i class="fas fa-map-marker-alt"></i> Location</a>
+  <a onclick="scrollToSection('delivery-section'); closeSidebar();"><i class="fas fa-truck"></i> Delivery</a>
+  <a onclick="scrollToSection('cart-section'); closeSidebar();"><i class="fas fa-shopping-cart"></i> Cart</a>
+</div>
+
+<main>
+  <!-- DRINKS SECTION (first) -->
+  <div id="drinks-section" class="section-container">
+    <div class="container">
+      <div class="section-title"><i class="fas fa-cocktail"></i> 🍾 Drinks Menu • Choose your size</div>
+      <div class="cat-filters" id="categoryFilters">
+        <button class="cat-btn active" data-cat="all">All Drinks</button>
+        <button class="cat-btn" data-cat="Beer">🍺 Beer</button>
+        <button class="cat-btn" data-cat="Wine">🍷 Wine</button>
+        <button class="cat-btn" data-cat="Sparkling Wine">🥂 Sparkling</button>
+        <button class="cat-btn" data-cat="Ciders">🍎 Ciders</button>
+        <button class="cat-btn" data-cat="Spirits">🥃 Spirits</button>
+        <button class="cat-btn" data-cat="Cold Drinks">🥤 Cold Drinks</button>
+        <button class="cat-btn" data-cat="Shooters">💥 Shooters</button>
+      </div>
+      <div id="productsContainer" class="product-grid"></div>
+    </div>
+  </div>
+
+  <!-- PARTY ZONE SECTION (second) -->
+  <div id="party-section" class="section-container">
+    <div class="container">
+      <div class="section-title"><i class="fas fa-music"></i> 🎉 Party Zone • Events & Vibes</div>
+      <div class="events-showcase">
+        <div class="featured-event">
+          <h2><i class="fas fa-calendar-alt"></i> UPCOMING: PURPLE HAZE FEST</h2>
+          <p>📍 25 April 2025 • Live DJ • Specials on Gin & Sparkling</p>
+          <img id="dynamicEventPhoto" class="event-img" src="https://placehold.co/900x400/2a1e4a/eacdff?text=VILLAGE+BEV+EVENT+🔥" alt="Upcoming Event">
+          <button onclick="changeEventPhoto()" class="btn" style="background:#9b73f0;"><i class="fas fa-camera"></i> Change Event Photo</button>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Luxury Balloon Decorations</h1>
-            <p>Transform your space into a magical experience with our premium balloon decorations. Perfect for birthdays, anniversaries, proposals, and special celebrations.</p>
-            <div class="hero-btns">
-                <a href="#packages" class="btn btn-primary"><i class="fas fa-gift"></i> View Packages</a>
-                <a href="https://wa.me/27810468068" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> Book Now</a>
-            </div>
+        <h3>📸 Party Memories</h3>
+        <div class="photo-gallery-row">
+          <img class="gallery-thumb" src="https://placehold.co/200x200/9670e0/ffffff?text=CROWD">
+          <img class="gallery-thumb" src="https://placehold.co/200x200/7a58b0/f5edff?text=DJ">
+          <img class="gallery-thumb" src="https://placehold.co/200x200/b18eff/221c3a?text=TOAST">
+          <img class="gallery-thumb" src="https://placehold.co/200x200/634daa/fff0ff?text=PARTY">
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Us</h2>
-                <p>Where balloons meet luxury vibes</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <p>At KingD Lux Balloons, we specialize in transforming spaces into breathtaking, balloon-filled wonders. Whether it's a birthday party, anniversary, or any special occasion, we bring creativity, elegance, and fun to every room we decorate.</p>
-                    <p>Our mission is simple: to turn any space into a celebration. We believe that balloons have the power to elevate any event, adding color, joy, and a touch of magic. From intimate gatherings to grand celebrations, we work closely with our clients to create memorable environments that leave a lasting impression.</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Balloon Decoration">
-                </div>
-            </div>
+        <div class="video-grid">
+          <div class="video-card"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"></iframe><p style="color:#dbcbff; font-size:11px;">Cheers moment</p></div>
+          <div class="video-card"><iframe src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0"></iframe><p style="color:#dbcbff;">Village night</p></div>
         </div>
-    </section>
+        <p style="margin-top: 20px;"><i class="fas fa-wine-bottle"></i> <strong>Epic events every weekend!</strong> Drink specials, good times, wildest hangout in Venda.</p>
+      </div>
+    </div>
+  </div>
 
-    <!-- Packages Section -->
-    <section class="packages" id="packages">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Luxury Packages</h2>
-                <p>Choose from our exquisite decoration packages or request a custom design</p>
-            </div>
-            
-            <div class="packages-grid">
-                <!-- Silver & Pink -->
-                <div class="package-card">
-                    <div class="package-badge">Popular</div>
-                    <div class="package-header silver-header">
-                        <h3>Silver & Pink</h3>
-                        <div class="package-price">R1,650</div>
-                    </div>
-                    <div class="package-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Elegant silver and pink theme</li>
-                            <li><i class="fas fa-check"></i> Premium quality balloons</li>
-                            <li><i class="fas fa-check"></i> Customized setup</li>
-                            <li><i class="fas fa-check"></i> Perfect for birthdays</li>
-                        </ul>
-                    </div>
-                    <div class="package-cta">
-                        <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Silver%20and%20Pink%20Package%20(R1650)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book This Package</a>
-                    </div>
-                </div>
-                
-                <!-- Black & Silver -->
-                <div class="package-card">
-                    <div class="package-header basic-header">
-                        <h3>Black & Silver</h3>
-                        <div class="package-price">R1,500</div>
-                    </div>
-                    <div class="package-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Sophisticated black and silver theme</li>
-                            <li><i class="fas fa-check"></i> Premium quality balloons</li>
-                            <li><i class="fas fa-check"></i> Elegant decorative elements</li>
-                            <li><i class="fas fa-check"></i> Perfect for elegant celebrations</li>
-                        </ul>
-                    </div>
-                    <div class="package-cta">
-                        <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Black%20and%20Silver%20Package%20(R1500)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book This Package</a>
-                    </div>
-                </div>
-                
-                <!-- L-Shaped Garland -->
-                <div class="package-card">
-                    <div class="package-badge">New</div>
-                    <div class="package-header gold-header">
-                        <h3>L-Shaped Garland</h3>
-                        <div class="package-price">R1,800</div>
-                    </div>
-                    <div class="package-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Beautiful L-shaped balloon garland</li>
-                            <li><i class="fas fa-check"></i> Custom color options</li>
-                            <li><i class="fas fa-check"></i> Premium quality balloons</li>
-                            <li><i class="fas fa-check"></i> Perfect as a photo backdrop</li>
-                        </ul>
-                    </div>
-                    <div class="package-cta">
-                        <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20L-Shaped%20Garland%20Package%20(R1800)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book This Package</a>
-                    </div>
-                </div>
-                
-                <!-- NEW: Be My GF Package -->
-                <div class="package-card">
-                    <div class="package-badge">Romantic</div>
-                    <div class="package-header pink-header">
-                        <h3>Be My GF</h3>
-                        <div class="package-price">R1,650</div>
-                    </div>
-                    <div class="package-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Romantic proposal setup</li>
-                            <li><i class="fas fa-check"></i> Custom "Be My GF" message</li>
-                            <li><i class="fas fa-check"></i> Elegant color scheme</li>
-                            <li><i class="fas fa-check"></i> Perfect for special moments</li>
-                        </ul>
-                    </div>
-                    <div class="package-cta">
-                        <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Be%20My%20GF%20Package%20(R1650)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book This Package</a>
-                    </div>
-                </div>
-                
-                <!-- NEW: Balloon Garland Package -->
-                <div class="package-card">
-                    <div class="package-badge">Trending</div>
-                    <div class="package-header purple-header">
-                        <h3>Balloon Garland</h3>
-                        <div class="package-price">R1,800</div>
-                    </div>
-                    <div class="package-features">
-                        <ul>
-                            <li><i class="fas fa-check"></i> Stunning balloon garland</li>
-                            <li><i class="fas fa-check"></i> Custom color combinations</li>
-                            <li><i class="fas fa-check"></i> Premium quality balloons</li>
-                            <li><i class="fas fa-check"></i> Perfect for any celebration</li>
-                        </ul>
-                    </div>
-                    <div class="package-cta">
-                        <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Balloon%20Garland%20Package%20(R1800)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book This Package</a>
-                    </div>
-                </div>
-            </div>
+  <!-- LOCATION SECTION (third) -->
+  <div id="location-section" class="section-container">
+    <div class="container">
+      <div class="section-title"><i class="fas fa-map-pin"></i> 📍 Our Location • Thohoyandou</div>
+      <div id="map" class="map-container"></div>
+      <p style="text-align:center; margin-top:12px;"><i class="fas fa-location-dot"></i> <strong>GPS: -22.978815, 30.433430</strong> — Heart of Venda</p>
+    </div>
+  </div>
+
+  <!-- DELIVERY SECTION (fourth) -->
+  <div id="delivery-section" class="section-container">
+    <div class="container">
+      <div class="section-title"><i class="fas fa-truck-fast"></i> ⚡ Delivery & Opening Times</div>
+      <div class="info-cards">
+        <div class="info-box"><i class="fas fa-motorcycle"></i><h3>30-MIN DELIVERY</h3><p>Thohoyandou & Venda</p><span class="badge-cod">Pay on delivery: Cash/Card</span></div>
+        <div class="info-box"><i class="fas fa-store"></i><h3>Opening Hours</h3><p>Mon-Thu: 9:00–22:00<br>Fri-Sat: 9:00–23:30<br>Sun: 10:00–18:00</p></div>
+        <div class="info-box"><i class="fas fa-clock"></i><h3>Delivery window</h3><p>Order before 21:00 → same day</p></div>
+        <div class="info-box"><i class="fas fa-credit-card"></i><h3>Payment</h3><p>Cash/Card on delivery<br>Yoco / Visa online</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART SECTION (fifth) -->
+  <div id="cart-section" class="section-container">
+    <div class="container">
+      <div class="section-title"><i class="fas fa-shopping-bag"></i> 🛒 Your Cart</div>
+      <div class="cart-side">
+        <div id="cartItemsList"><div class="order-item">✨ Cart empty — add drinks above</div></div>
+        <div id="cartTotal" style="font-weight:800; margin:14px 0; font-size:1.3rem;">Total: R 0.00</div>
+        <div class="pay-methods" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <span class="badge-cod" style="background:#6f4cd9;">💰 Cash on delivery</span>
+          <span class="badge-cod" style="background:#3a2b70;">💳 Card on delivery</span>
+          <span><i class="fab fa-yoco"></i> Yoco / Visa</span>
         </div>
-    </section>
+        <button id="checkoutBtn" class="btn" style="width:100%; justify-content:center;"><i class="fas fa-lock"></i> Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+</main>
 
-    <!-- Luxury Packages Section -->
-    <section class="luxury-packages" id="luxury-packages">
-        <div class="container">
-            <div class="section-title">
-                <h2>Luxury Romantic Room Packages</h2>
-                <p>Specialized packages for creating unforgettable romantic experiences</p>
-            </div>
-            
-            <!-- Basic Package -->
-            <div class="luxury-package-card">
-                <div class="luxury-package-header luxury-basic">
-                    <h3>BASIC PACKAGE</h3>
-                    <div class="luxury-package-price">R1,050</div>
-                </div>
-                <div class="luxury-package-features">
-                    <ul>
-                        <li><i class="fas fa-check"></i> 20 Ceiling Balloons</li>
-                        <li><i class="fas fa-check"></i> 10 Floor Balloons</li>
-                        <li><i class="fas fa-check"></i> Happy Birthday Banner</li>
-                    </ul>
-                </div>
-                <div class="luxury-package-cta">
-                    <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Basic%20Romantic%20Room%20Package%20(R1050)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book Basic Package</a>
-                </div>
-            </div>
-            
-            <!-- Silver Package -->
-            <div class="luxury-package-card">
-                <div class="luxury-package-header luxury-silver">
-                    <h3>SILVER PACKAGE</h3>
-                    <div class="luxury-package-price">R1,650</div>
-                </div>
-                <div class="luxury-package-features">
-                    <ul>
-                        <li><i class="fas fa-check"></i> 25 Ceiling Balloons</li>
-                        <li><i class="fas fa-check"></i> 2 Heart Helium Balloons OR Number Helium Balloons</li>
-                        <li><i class="fas fa-check"></i> Rose Petals on the Bed</li>
-                        <li><i class="fas fa-check"></i> Happy Birthday Banner</li>
-                    </ul>
-                </div>
-                <div class="luxury-package-cta">
-                    <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Silver%20Romantic%20Room%20Package%20(R1650)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book Silver Package</a>
-                </div>
-            </div>
-            
-            <!-- Gold Package -->
-            <div class="luxury-package-card">
-                <div class="luxury-package-header luxury-gold">
-                    <h3>GOLD PACKAGE</h3>
-                    <div class="luxury-package-price">R2,150</div>
-                </div>
-                <div class="luxury-package-features">
-                    <ul>
-                        <li><i class="fas fa-check"></i> 30 Ceiling Balloons</li>
-                        <li><i class="fas fa-check"></i> 15 Floor Balloons</li>
-                        <li><i class="fas fa-check"></i> 2 Heart Helium Balloons</li>
-                        <li><i class="fas fa-check"></i> Any Number Helium Balloons</li>
-                        <li><i class="fas fa-check"></i> Happy Birthday/Anniversary Banner</li>
-                        <li><i class="fas fa-check"></i> Free Complementary Champagne</li>
-                    </ul>
-                </div>
-                <div class="luxury-package-cta">
-                    <a href="https://wa.me/27810468068?text=Hi!%20I'm%20interested%20in%20the%20Gold%20Romantic%20Room%20Package%20(R2150)" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Book Gold Package</a>
-                </div>
-            </div>
-            
-            <div class="package-note">
-                <h4><i class="fas fa-info-circle"></i> Important Information</h4>
-                <p>All prices include transportation fees. Please note that our packages do not include hotel reservations.</p>
-            </div>
+<footer>
+  <p>© 2025 Village Bev — Purple Edition • Drink responsibly 18+</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // ========== PRODUCTS WITH SIZE OPTIONS ==========
+  // Wine: 1L and 3L | Beer: 500ml and 750ml | Savanna: 330ml Can, 500ml Bottle, 500ml Can (updated)
+  const productsData = [
+    { id:1, name:"4th Street Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 } },
+    { id:2, name:"Robertson Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":65, "3L":170 } },
+    { id:3, name:"Robertson Sweet Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":70, "3L":185 } },
+    { id:4, name:"Drostdy Hof Adelpracht", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":52, "3L":138 } },
+    { id:5, name:"Autumn Harvest Perlé Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":45, "3L":119 } },
+    { id:6, name:"4th Street Wine", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 } },
+    { id:7, name:"Black Label Beer", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
+    { id:8, name:"Castle Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":18, "750ml":26 } },
+    { id:9, name:"Castle Lite", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
+    { id:10, name:"Heineken", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 } },
+    { id:11, name:"Amstel Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
+    { id:12, name:"Corona", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
+    { id:13, name:"Windhoek", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 } },
+    { id:14, name:"Stella Artois", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":21, "750ml":29 } },
+    { id:15, name:"Flying Fish", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
+    // Savanna: 330ml Can, 500ml Bottle, 500ml Can (updated from 330ml Bottle to 330ml Can)
+    { id:16, name:"Savanna Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 } },
+    { id:17, name:"Savanna Light", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 } },
+    { id:18, name:"Hunters Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":22, "500ml Bottle":32 } },
+    { id:19, name:"Brutal Fruit Ruby Apple", category:"Ciders", sizes:["330ml Can","500ml Can"], priceMap:{ "330ml Can":26, "500ml Can":38 } },
+    { id:20, name:"Bernini Blush", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":20, "500ml Bottle":30 } },
+    { id:21, name:"Annabelle Cuvée Blanche", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":20 } },
+    { id:22, name:"JC Le Roux Le Domaine", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":110 } },
+    { id:23, name:"Red Bull", category:"Cold Drinks", sizes:["250ml"], priceMap:{ "250ml":20 } },
+    { id:24, name:"Schweppes Lemonade", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":20 } },
+    { id:25, name:"Coca Cola", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":13 } },
+    { id:26, name:"Tanqueray Gin", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":350 } },
+    { id:27, name:"Jameson Whiskey", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":160 } },
+    { id:28, name:"Jack Daniel's", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":50 } },
+    { id:29, name:"Jägermeister", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":28 } },
+    { id:30, name:"Bug Red Shooter", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":16 } }
+  ];
+
+  let cart = [];
+  let currentFilter = "all";
+
+  function renderProducts(filterCat = "all") {
+    const container = document.getElementById("productsContainer");
+    const filtered = filterCat === "all" ? productsData : productsData.filter(p => p.category === filterCat);
+    container.innerHTML = filtered.map(p => {
+      const sizeOptions = p.sizes.map(sz => `<option value="${sz}">${sz} - R ${p.priceMap[sz]}</option>`).join('');
+      return `
+        <div class="product-card">
+          <div class="product-cat">${p.category}</div>
+          <div class="product-name">${p.name}</div>
+          <select class="size-select" id="size-${p.id}">
+            ${sizeOptions}
+          </select>
+          <button class="btn" onclick="addToCartWithSize(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
         </div>
-    </section>
+      `;
+    }).join("");
+  }
 
-    <!-- Add-ons Section -->
-    <section class="addons" id="addons">
-        <div class="container">
-            <div class="section-title">
-                <h2>Add-Ons</h2>
-                <p>Enhance your package with these premium additions</p>
-            </div>
-            
-            <div class="addons-grid">
-                <div class="addon-card">
-                    <i class="fas fa-font"></i>
-                    <h3>Customized Name Banner</h3>
-                    <p>Personalize with the celebrant's name or nickname</p>
-                    <div class="addon-price">R300</div>
-                </div>
-                
-                <div class="addon-card">
-                    <i class="fas fa-images"></i>
-                    <h3>Photo Garland</h3>
-                    <p>Hanging or framed memories around the room</p>
-                    <div class="addon-price">R200</div>
-                </div>
-                
-                <div class="addon-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>LED Light-Up Numbers/Letters</h3>
-                    <p>Freestanding light-up numbers/letters</p>
-                    <div class="addon-price">R70 per light</div>
-                </div>
-                
-                <div class="addon-card">
-                    <i class="fas fa-gift"></i>
-                    <h3>Gift Errand Run</h3>
-                    <p>Wrapped and placed beautifully within the décor</p>
-                    <div class="addon-price">R250 - R350</div>
-                </div>
-                
-                <div class="addon-card">
-                    <i class="fas fa-newspaper"></i>
-                    <h3>Newspaper Design</h3>
-                    <p>Custom newspaper with your message</p>
-                    <div class="addon-price">R200</div>
-                </div>
-            </div>
-        </div>
-    </section>
+  window.addToCartWithSize = (id, name) => {
+    const product = productsData.find(p => p.id === id);
+    if (!product) return;
+    const sizeSelect = document.getElementById(`size-${id}`);
+    const selectedSize = sizeSelect.value;
+    const price = product.priceMap[selectedSize];
+    const existing = cart.find(i => i.id === id && i.size === selectedSize);
+    if(existing) existing.qty += 1;
+    else cart.push({ id, name, size: selectedSize, price, qty: 1 });
+    updateCartUI();
+  };
 
-    <!-- Booking Process -->
-    <section class="booking-process" id="booking">
-        <div class="container">
-            <div class="section-title">
-                <h2>Booking Process</h2>
-                <p>How to secure your luxury balloon decoration</p>
-            </div>
-            
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Contact Us</h3>
-                    <p>Message us on WhatsApp with your event details</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Provide Details</h3>
-                    <p>Share your event date, location, theme, and budget</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Secure Booking</h3>
-                    <p>Pay a 50% deposit to confirm your booking</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Enjoy Your Event</h3>
-                    <p>Relax while we transform your space</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  function updateCartUI() {
+    const cartDiv = document.getElementById("cartItemsList");
+    if(cart.length === 0) {
+      cartDiv.innerHTML = `<div class="order-item">✨ Cart empty — add drinks above</div>`;
+      document.getElementById("cartTotal").innerHTML = "Total: R 0.00";
+      return;
+    }
+    let total = 0;
+    let html = "";
+    cart.forEach((item, idx) => {
+      total += item.price * item.qty;
+      html += `<div class="order-item"><span><strong>${item.name}</strong> (${item.size}) x${item.qty}</span><span>R ${(item.price * item.qty).toFixed(2)}</span> <button style="background:none; border:none; color:#b77eff; cursor:pointer;" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button></div>`;
+    });
+    cartDiv.innerHTML = html;
+    document.getElementById("cartTotal").innerHTML = `Total: R ${total.toFixed(2)}`;
+  }
 
-    <!-- Notice Section -->
-    <section class="notice">
-        <div class="container">
-            <div class="notice-content">
-                <h3>Important Notice</h3>
-                <p>We kindly request a notice period of 7 days for all bookings. A late fee of R250 will be imposed on reservations made less than 7 days before your scheduled event.</p>
-            </div>
-        </div>
-    </section>
+  window.removeFromCart = (idx) => {
+    cart.splice(idx,1);
+    updateCartUI();
+  };
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Transform Your Event?</h2>
-                <p>Contact us via WhatsApp to discuss your special occasion and get a personalized quote. We're here to make your celebration unforgettable!</p>
-                <a href="https://wa.me/27810468068" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Message Us on WhatsApp</a>
-            </div>
-        </div>
-    </section>
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    if(cart.length === 0) alert("🛒 Add some drinks first!");
+    else alert("✅ Order placed! Pay on delivery (cash/card) or via Yoco. Village Bev delivers within 30min in Thohoyandou. Cheers!");
+  });
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>KingD Lux Balloons</h3>
-                    <p>Luxury balloon decorations for all your special occasions. Transforming spaces into magical experiences.</p>
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@kingd.lux.balloon?_t=ZS-8zTR7GbhynA&_r=1"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.instagram.com/kingd_luxballoons?igsh=M29mcTZhazR5cGh6"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#packages">Packages</a></li>
-                        <li><a href="#luxury-packages">Luxury Room</a></li>
-                        <li><a href="#addons">Add-Ons</a></li>
-                        <li><a href="#booking">Booking Process</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <p><i class="fab fa-whatsapp"></i> WhatsApp: 081 046 8068</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Serving Pretoria & Johannesburg</p>
-                    <p><i class="fas fa-envelope"></i> Kingdjustballons@gmail.com</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 KingD Lux Balloons. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+  // filter buttons
+  document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.getAttribute("data-cat");
+      renderProducts(currentFilter);
+    });
+  });
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/27810468068" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+  window.changeEventPhoto = () => {
+    let newUrl = prompt("Enter new event image URL:", "https://placehold.co/900x400/6845c0/eeddff?text=NEW+EVENT");
+    if(newUrl) document.getElementById("dynamicEventPhoto").src = newUrl;
+  };
 
-    <script>
-        // Mobile Navigation Toggle
-        document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('show');
-        });
-        
-        // Smooth Scrolling for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.getElementById('navMenu').classList.remove('show');
-                }
-            });
-        });
-        
-        // Animate elements on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.package-card, .addon-card, .step, .luxury-package-card');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = 1;
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        }
-        
-        // Set initial state for animated elements
-        document.querySelectorAll('.package-card, .addon-card, .step, .luxury-package-card').forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-        
-        // Listen for scroll events
-        window.addEventListener('scroll', animateOnScroll);
-        // Trigger once on load
-        window.addEventListener('load', animateOnScroll);
-    </script>
+  // Map
+  const map = L.map('map').setView([-22.978815, 30.433430], 16);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+  L.marker([-22.978815, 30.433430]).addTo(map).bindPopup('<b>🍇 VILLAGE BEV</b><br/>Main store Thohoyandou').openPopup();
+
+  // Intersection Observer for section reveal
+  const sections = document.querySelectorAll('.section-container');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(section => observer.observe(section));
+
+  // Scroll to section function
+  window.scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if(element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Sidebar menu functionality
+  const menuBtn = document.getElementById('menuButton');
+  const sidebar = document.getElementById('sidebarMenu');
+  const overlay = document.getElementById('overlay');
+  const closeMenuBtn = document.getElementById('closeMenu');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', openSidebar);
+  closeMenuBtn.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', closeSidebar);
+
+  // Hide global loader after page loads
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('globalLoader').classList.add('hidden');
+      sections.forEach(section => section.classList.add('visible'));
+    }, 800);
+    renderProducts("all");
+  });
+</script>
 </body>
 </html>
-
