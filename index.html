@@ -1,13 +1,15 @@
+Here is an HTML document that creates a professional liquor store website with all your requested changes: WhatsApp ordering, video backgrounds, a custom logo, animated text, and a clean black & white aesthetic.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Village Bev | Purple Haze • Drinks & Party Hub</title>
+  <title>Village Bev | Premium Liquor Store</title>
   <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Leaflet CSS for map -->
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     * {
@@ -18,52 +20,40 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #faf5ff 0%, #f0e9ff 100%);
-      color: #1e1a2f;
+      background: #ffffff;
+      color: #111111;
       overflow-x: hidden;
     }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #e9e0fc; }
-    ::-webkit-scrollbar-thumb { background: #9b7bdf; border-radius: 10px; }
-
-    /* LOADING SCREEN */
+    /* Loading Screen */
     .loading-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(45, 35, 75, 0.98);
-      backdrop-filter: blur(12px);
+      background: #000000;
       z-index: 9999;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      transition: opacity 0.6s ease;
     }
     .loading-spinner {
-      width: 70px;
-      height: 70px;
-      border: 5px solid rgba(156, 112, 220, 0.3);
-      border-top-color: #c084fc;
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #ffffff;
       border-radius: 50%;
-      animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      animation: spin 1s ease infinite;
       margin-bottom: 20px;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text {
-      color: #e0b0ff;
-      font-size: 1.3rem;
-      font-weight: 600;
-      animation: pulse 1.5s ease infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; text-shadow: 0 0 8px #b77eff; }
+      color: #ffffff;
+      font-weight: 500;
+      letter-spacing: 2px;
     }
     .loading-overlay.hidden {
       opacity: 0;
@@ -71,117 +61,189 @@
       pointer-events: none;
     }
 
-    /* SECTION STYLES */
-    .section-container {
-      min-height: 100vh;
-      padding: 100px 0 80px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      scroll-margin-top: 80px;
-    }
-    .section-container.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    /* HEADER WITH MENU BUTTON */
-    header {
-      background: rgba(45, 35, 75, 0.95);
-      backdrop-filter: blur(12px);
-      color: white;
+    /* HERO VIDEO BACKGROUND */
+    .hero-video-container {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
     }
-    .navbar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      gap: 20px;
+    .hero-video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
     }
-    .logo h1 {
-      font-size: 1.8rem;
+    .hero-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      color: white;
+      width: 90%;
+      max-width: 700px;
+      pointer-events: none;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #e0b0ff, #c084fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
-    .logo span {
-      font-size: 0.75rem;
-      color: #cdc2f0;
+    .hero-content p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      z-index: 2;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
     }
 
-    /* MENU BUTTON + SIDEBAR */
-    .menu-btn {
-      background: rgba(156, 112, 220, 0.3);
-      border: 1px solid #c084fc;
+    /* Main Content - appears after scroll */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      background: #ffffff;
+      margin-top: 100vh;
+      padding-top: 20px;
+      box-shadow: 0 -20px 40px rgba(0,0,0,0.1);
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #eaeaea;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .navbar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    /* Logo Circle */
+    .logo-circle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-circle-img {
+      width: 55px;
+      height: 55px;
+      background: #000000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: white;
-      padding: 10px 20px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      border: 2px solid #d4af37;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      color: #000000;
+    }
+    .logo-text span {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #666;
+      display: block;
+    }
+
+    .menu-btn {
+      background: #000000;
+      color: white;
+      padding: 10px 24px;
       border-radius: 40px;
       font-weight: 600;
       cursor: pointer;
+      border: none;
+      transition: 0.2s;
       display: flex;
       align-items: center;
-      gap: 10px;
-      transition: 0.2s;
+      gap: 8px;
     }
     .menu-btn:hover {
-      background: #7c4dff;
+      background: #333;
       transform: scale(1.02);
     }
+
+    /* Sidebar */
     .sidebar-menu {
       position: fixed;
       top: 0;
       right: -320px;
       width: 300px;
       height: 100%;
-      background: rgba(30, 25, 55, 0.98);
-      backdrop-filter: blur(16px);
-      z-index: 1100;
-      transition: right 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      background: #ffffff;
+      z-index: 1000;
+      transition: right 0.3s ease;
       padding: 100px 24px 40px;
-      box-shadow: -5px 0 30px rgba(0,0,0,0.3);
-      border-left: 1px solid #c084fc;
+      box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+      border-left: 1px solid #eee;
     }
-    .sidebar-menu.open {
-      right: 0;
-    }
+    .sidebar-menu.open { right: 0; }
     .sidebar-menu a {
       display: flex;
       align-items: center;
       gap: 14px;
       padding: 16px 0;
-      color: #f0eaff;
+      color: #111;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.2rem;
-      border-bottom: 1px solid rgba(192, 132, 252, 0.2);
-      transition: 0.2s;
+      border-bottom: 1px solid #f0f0f0;
       cursor: pointer;
+      transition: 0.2s;
     }
-    .sidebar-menu a:hover {
-      color: #e0b0ff;
-      padding-left: 12px;
-    }
+    .sidebar-menu a:hover { padding-left: 12px; color: #000; background: #f5f5f5; }
     .close-menu {
       position: absolute;
       top: 20px;
       right: 24px;
       font-size: 28px;
       cursor: pointer;
-      color: #e0b0ff;
     }
     .overlay {
       position: fixed;
@@ -190,216 +252,236 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.5);
-      z-index: 1050;
+      z-index: 999;
       opacity: 0;
       visibility: hidden;
       transition: 0.3s;
     }
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .overlay.active { opacity: 1; visibility: visible; }
 
+    /* Sections */
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 28px;
+      scroll-margin-top: 90px;
+    }
     .section-title {
       font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 32px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      border-left: 4px solid #000;
       padding-left: 20px;
-      border-left: 6px solid #a974f3;
-      color: #2e2548;
-    }
-    .section-title i {
-      color: #b77eff;
-      margin-right: 12px;
     }
 
-    /* product cards */
+    /* Letter-by-letter animation */
+    .animate-letters {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animate-letters.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.05s ease-out;
+    }
+
+    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
+      gap: 30px;
     }
     .product-card {
-      background: white;
-      border-radius: 32px;
+      background: #ffffff;
+      border-radius: 20px;
       padding: 20px;
-      box-shadow: 0 15px 30px rgba(98, 56, 148, 0.08);
-      transition: all 0.25s ease;
-      border: 1px solid rgba(156, 112, 220, 0.2);
+      transition: 0.25s;
+      border: 1px solid #eaeaea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 35px rgba(98, 56, 148, 0.15);
-      border-color: #c5a3ff;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      border-color: #ccc;
+    }
+    .product-img {
+      width: 100%;
+      height: 160px;
+      background: #f8f8f8;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.8rem;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
     .product-cat {
       font-size: 0.7rem;
-      font-weight: 700;
-      background: #ede5ff;
-      display: inline-block;
-      padding: 4px 14px;
-      border-radius: 40px;
-      color: #5b3b8c;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
     }
     .product-name {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin: 12px 0 4px;
-      color: #2b1f44;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 8px 0;
     }
     .size-select {
-      margin: 12px 0;
-      padding: 8px;
-      border-radius: 28px;
-      border: 1px solid #d9c8ff;
-      background: #faf7ff;
-      font-size: 0.8rem;
       width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
     }
     .btn {
-      background: #7c4dff;
+      background: #000000;
       color: white;
-      padding: 8px 20px;
+      padding: 10px 20px;
       border-radius: 40px;
       font-weight: 600;
       border: none;
       cursor: pointer;
       transition: 0.2s;
-      font-size: 0.85rem;
-      display: inline-flex;
+      width: 100%;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
     }
     .btn:hover {
-      background: #6339d4;
-      transform: scale(1.02);
+      background: #333;
     }
 
     .cat-filters {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
     .cat-btn {
-      background: #ede4ff;
+      background: #f5f5f5;
       border: none;
-      padding: 8px 22px;
+      padding: 8px 24px;
       border-radius: 40px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
-      color: #3c2c62;
     }
     .cat-btn.active, .cat-btn:hover {
-      background: #8a65e0;
+      background: #000;
       color: white;
     }
 
+    /* Info Cards */
     .info-cards {
       display: flex;
       flex-wrap: wrap;
-      gap: 28px;
-      background: rgba(255, 252, 255, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: 48px;
-      padding: 30px;
-      justify-content: space-between;
+      gap: 24px;
+      background: #fafafa;
+      border-radius: 32px;
+      padding: 32px;
     }
     .info-box {
       flex: 1;
       min-width: 180px;
       background: white;
-      border-radius: 32px;
-      padding: 22px;
+      border-radius: 24px;
+      padding: 24px;
       text-align: center;
+      border: 1px solid #eee;
     }
-    .info-box i {
-      font-size: 2rem;
-      color: #916cf0;
-    }
-    .badge-cod {
-      background: #4f3a7c;
-      padding: 5px 12px;
-      border-radius: 30px;
+    .whatsapp-btn {
+      background: #25D366;
       color: white;
-      font-size: 0.7rem;
-      display: inline-block;
-      margin-top: 8px;
+      border: none;
+      margin-top: 12px;
     }
+    .whatsapp-btn:hover { background: #128C7E; }
 
+    /* Party Zone */
     .events-showcase {
-      background: rgba(255, 247, 255, 0.8);
-      border-radius: 56px;
+      background: #fafafa;
+      border-radius: 32px;
       padding: 32px;
-      border: 1px solid #cfbaff;
     }
     .featured-event {
-      background: linear-gradient(115deg, #2b2348, #1f193a);
-      border-radius: 36px;
-      padding: 24px;
+      background: #000;
       color: white;
+      border-radius: 28px;
+      padding: 28px;
       margin-bottom: 32px;
     }
     .event-img {
       width: 100%;
-      border-radius: 28px;
+      border-radius: 20px;
       margin: 20px 0;
       max-height: 280px;
       object-fit: cover;
     }
-    .video-grid, .photo-gallery-row {
+    .video-grid {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       flex-wrap: wrap;
-      margin: 20px 0;
+      margin: 24px 0;
     }
     .video-card {
-      background: #1e1935;
-      border-radius: 24px;
+      background: #f0f0f0;
+      border-radius: 20px;
       overflow: hidden;
-      width: 180px;
+      width: 240px;
     }
-    .video-card iframe {
+    .video-card video {
       width: 100%;
-      height: 110px;
-      border: none;
+      height: 140px;
+      object-fit: cover;
     }
     .gallery-thumb {
       width: 100px;
       height: 100px;
-      border-radius: 20px;
+      border-radius: 16px;
       object-fit: cover;
-      border: 2px solid #d3befa;
+      border: 2px solid #eee;
     }
     .map-container {
-      height: 360px;
-      width: 100%;
-      border-radius: 40px;
+      height: 380px;
+      border-radius: 28px;
       overflow: hidden;
       margin: 20px 0;
     }
     .cart-side {
-      background: white;
-      border-radius: 40px;
+      background: #fafafa;
+      border-radius: 28px;
       padding: 28px;
-      box-shadow: 0 12px 30px rgba(98, 56, 148, 0.1);
     }
     .order-item {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #ede3ff;
       padding: 12px 0;
+      border-bottom: 1px solid #eee;
     }
     footer {
-      background: #18132f;
-      color: #c9bcff;
+      background: #000;
+      color: #ccc;
       padding: 40px 20px;
       text-align: center;
     }
-    @media (max-width: 780px) {
-      .container { padding: 0 20px; }
-      .section-title { font-size: 1.6rem; }
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2rem; }
+      .section-container { padding: 50px 20px; }
     }
   </style>
 </head>
@@ -407,160 +489,161 @@
 
 <div id="globalLoader" class="loading-overlay">
   <div class="loading-spinner"></div>
-  <div class="loading-text">VILLAGE BEV • LOADING VIBES</div>
+  <div class="loading-text">VILLAGE BEV</div>
 </div>
 
-<header>
-  <div class="container">
+<!-- Hero Video Background (autoplay muted, no controls, disappears on scroll) -->
+<div class="hero-video-container" id="heroVideo">
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-pouring-beer-into-a-glass-32645-large.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+  <div class="logo-circle-img" style="width: 100px; height: 100px; font-size: 2rem; margin: 0 auto 20px; background: rgba(0,0,0,0.6); border: 2px solid #d4af37;">VB</div>
+  <h1>VILLAGE BEV</h1>
+  <p>Premium liquor • Fastest delivery in Thohoyandou</p>
+</div>
+<div class="scroll-indicator" onclick="scrollToContent()">
+  <i class="fas fa-chevron-down fa-2x"></i>
+</div>
+
+<main class="main-content" id="mainContent">
+  <header>
     <div class="navbar">
-      <div class="logo">
-        <h1>🍇 VILLAGE BEV</h1>
-        <span>Purple Haze • Venda's #1</span>
+      <div class="logo-circle">
+        <div class="logo-circle-img">VB</div>
+        <div class="logo-text">VILLAGE BEV<span>Venda's #1 choice</span></div>
       </div>
-      <div class="menu-btn" id="menuButton">
-        <i class="fas fa-bars"></i> MENU
-      </div>
+      <button class="menu-btn" id="menuButton"><i class="fas fa-bars"></i> MENU</button>
     </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="sidebar-menu" id="sidebarMenu">
+    <div class="close-menu" id="closeMenu">&times;</div>
+    <a onclick="scrollToSection('drinks-section'); closeSidebar();"><i class="fas fa-wine-bottle"></i> Drinks</a>
+    <a onclick="scrollToSection('party-section'); closeSidebar();"><i class="fas fa-glass-cheers"></i> Party Zone</a>
+    <a onclick="scrollToSection('location-section'); closeSidebar();"><i class="fas fa-map-marker-alt"></i> Location</a>
+    <a onclick="scrollToSection('delivery-section'); closeSidebar();"><i class="fas fa-truck"></i> Delivery</a>
+    <a onclick="scrollToSection('cart-section'); closeSidebar();"><i class="fas fa-shopping-cart"></i> Cart</a>
   </div>
-</header>
 
-<!-- Sidebar Menu -->
-<div class="overlay" id="overlay"></div>
-<div class="sidebar-menu" id="sidebarMenu">
-  <div class="close-menu" id="closeMenu">&times;</div>
-  <a onclick="scrollToSection('drinks-section'); closeSidebar();"><i class="fas fa-wine-bottle"></i> Drinks</a>
-  <a onclick="scrollToSection('party-section'); closeSidebar();"><i class="fas fa-glass-cheers"></i> Party Zone</a>
-  <a onclick="scrollToSection('location-section'); closeSidebar();"><i class="fas fa-map-marker-alt"></i> Location</a>
-  <a onclick="scrollToSection('delivery-section'); closeSidebar();"><i class="fas fa-truck"></i> Delivery</a>
-  <a onclick="scrollToSection('cart-section'); closeSidebar();"><i class="fas fa-shopping-cart"></i> Cart</a>
-</div>
-
-<main>
-  <!-- DRINKS SECTION (first) -->
+  <!-- DRINKS SECTION -->
   <div id="drinks-section" class="section-container">
-    <div class="container">
-      <div class="section-title"><i class="fas fa-cocktail"></i> 🍾 Drinks Menu • Choose your size</div>
-      <div class="cat-filters" id="categoryFilters">
-        <button class="cat-btn active" data-cat="all">All Drinks</button>
-        <button class="cat-btn" data-cat="Beer">🍺 Beer</button>
-        <button class="cat-btn" data-cat="Wine">🍷 Wine</button>
-        <button class="cat-btn" data-cat="Sparkling Wine">🥂 Sparkling</button>
-        <button class="cat-btn" data-cat="Ciders">🍎 Ciders</button>
-        <button class="cat-btn" data-cat="Spirits">🥃 Spirits</button>
-        <button class="cat-btn" data-cat="Cold Drinks">🥤 Cold Drinks</button>
-        <button class="cat-btn" data-cat="Shooters">💥 Shooters</button>
-      </div>
-      <div id="productsContainer" class="product-grid"></div>
+    <div class="section-title animate-letters"><span class="letter-animate">🍾 Drinks Menu • Choose your size</span></div>
+    <div class="cat-filters" id="categoryFilters">
+      <button class="cat-btn active" data-cat="all">All Drinks</button>
+      <button class="cat-btn" data-cat="Beer">Beer</button>
+      <button class="cat-btn" data-cat="Wine">Wine</button>
+      <button class="cat-btn" data-cat="Sparkling Wine">Sparkling</button>
+      <button class="cat-btn" data-cat="Ciders">Ciders</button>
+      <button class="cat-btn" data-cat="Spirits">Spirits</button>
+      <button class="cat-btn" data-cat="Cold Drinks">Cold Drinks</button>
+      <button class="cat-btn" data-cat="Shooters">Shooters</button>
     </div>
+    <div id="productsContainer" class="product-grid"></div>
   </div>
 
-  <!-- PARTY ZONE SECTION (second) -->
+  <!-- PARTY ZONE -->
   <div id="party-section" class="section-container">
-    <div class="container">
-      <div class="section-title"><i class="fas fa-music"></i> 🎉 Party Zone • Events & Vibes</div>
-      <div class="events-showcase">
-        <div class="featured-event">
-          <h2><i class="fas fa-calendar-alt"></i> UPCOMING: PURPLE HAZE FEST</h2>
-          <p>📍 25 April 2025 • Live DJ • Specials on Gin & Sparkling</p>
-          <img id="dynamicEventPhoto" class="event-img" src="https://placehold.co/900x400/2a1e4a/eacdff?text=VILLAGE+BEV+EVENT+🔥" alt="Upcoming Event">
-          <button onclick="changeEventPhoto()" class="btn" style="background:#9b73f0;"><i class="fas fa-camera"></i> Change Event Photo</button>
+    <div class="section-title animate-letters">🎉 Party Zone • Events & Vibes</div>
+    <div class="events-showcase">
+      <div class="featured-event">
+        <h2>UPCOMING: PURPLE HAZE FEST</h2>
+        <p>📍 25 April 2025 • Live DJ • Specials on Gin & Sparkling</p>
+        <img id="dynamicEventPhoto" class="event-img" src="https://placehold.co/900x400/111111/ffffff?text=EVENT+POSTER" alt="Event">
+        <button onclick="changeEventPhoto()" class="btn" style="background:#333;"><i class="fas fa-camera"></i> Change Event Photo</button>
+      </div>
+      <h3>📸 Party Memories</h3>
+      <div class="photo-gallery-row" style="display:flex; gap:12px; flex-wrap:wrap; margin:20px 0;">
+        <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+1">
+        <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+2">
+        <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+3">
+      </div>
+      <h3>🎥 Video Memories</h3>
+      <div class="video-grid" id="videoGrid">
+        <!-- Video elements with controls, muted initially but full controls -->
+        <div class="video-card">
+          <video controls muted preload="metadata">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4">
+          </video>
+          <p style="padding:8px;">Cheers moment</p>
         </div>
-        <h3>📸 Party Memories</h3>
-        <div class="photo-gallery-row">
-          <img class="gallery-thumb" src="https://placehold.co/200x200/9670e0/ffffff?text=CROWD">
-          <img class="gallery-thumb" src="https://placehold.co/200x200/7a58b0/f5edff?text=DJ">
-          <img class="gallery-thumb" src="https://placehold.co/200x200/b18eff/221c3a?text=TOAST">
-          <img class="gallery-thumb" src="https://placehold.co/200x200/634daa/fff0ff?text=PARTY">
+        <div class="video-card">
+          <video controls muted preload="metadata">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4">
+          </video>
+          <p style="padding:8px;">Party vibe</p>
         </div>
-        <div class="video-grid">
-          <div class="video-card"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0"></iframe><p style="color:#dbcbff; font-size:11px;">Cheers moment</p></div>
-          <div class="video-card"><iframe src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0"></iframe><p style="color:#dbcbff;">Village night</p></div>
+        <div class="video-card">
+          <video controls muted preload="metadata">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-dancing-at-a-party-32807-large.mp4" type="video/mp4">
+          </video>
+          <p style="padding:8px;">Dance floor</p>
         </div>
-        <p style="margin-top: 20px;"><i class="fas fa-wine-bottle"></i> <strong>Epic events every weekend!</strong> Drink specials, good times, wildest hangout in Venda.</p>
       </div>
     </div>
   </div>
 
-  <!-- LOCATION SECTION (third) -->
+  <!-- LOCATION -->
   <div id="location-section" class="section-container">
-    <div class="container">
-      <div class="section-title"><i class="fas fa-map-pin"></i> 📍 Our Location • Thohoyandou</div>
-      <div id="map" class="map-container"></div>
-      <p style="text-align:center; margin-top:12px;"><i class="fas fa-location-dot"></i> <strong>GPS: -22.978815, 30.433430</strong> — Heart of Venda</p>
-    </div>
+    <div class="section-title animate-letters">📍 Our Location • Thohoyandou</div>
+    <div id="map" class="map-container"></div>
+    <p style="text-align:center; margin-top:12px;"><i class="fas fa-location-dot"></i> <strong>GPS: -22.978815, 30.433430</strong></p>
   </div>
 
-  <!-- DELIVERY SECTION (fourth) -->
+  <!-- DELIVERY SECTION with WhatsApp -->
   <div id="delivery-section" class="section-container">
-    <div class="container">
-      <div class="section-title"><i class="fas fa-truck-fast"></i> ⚡ Delivery & Opening Times</div>
-      <div class="info-cards">
-        <div class="info-box"><i class="fas fa-motorcycle"></i><h3>30-MIN DELIVERY</h3><p>Thohoyandou & Venda</p><span class="badge-cod">Pay on delivery: Cash/Card</span></div>
-        <div class="info-box"><i class="fas fa-store"></i><h3>Opening Hours</h3><p>Mon-Thu: 9:00–22:00<br>Fri-Sat: 9:00–23:30<br>Sun: 10:00–18:00</p></div>
-        <div class="info-box"><i class="fas fa-clock"></i><h3>Delivery window</h3><p>Order before 21:00 → same day</p></div>
-        <div class="info-box"><i class="fas fa-credit-card"></i><h3>Payment</h3><p>Cash/Card on delivery<br>Yoco / Visa online</p></div>
-      </div>
+    <div class="section-title animate-letters">🚚 Delivery & Opening Times</div>
+    <div class="info-cards">
+      <div class="info-box"><i class="fas fa-truck-fast"></i><h3>30-MIN DELIVERY</h3><p>Thohoyandou & Venda</p><p><strong>Delivery fee based on distance</strong></p></div>
+      <div class="info-box"><i class="fas fa-store"></i><h3>Opening Hours</h3><p>Mon-Thu: 9:00–22:00<br>Fri-Sat: 9:00–23:30<br>Sun: 10:00–18:00</p></div>
+      <div class="info-box"><i class="fab fa-whatsapp"></i><h3>Order via WhatsApp</h3><p>Send your cart & location</p><button id="whatsappOrderBtn" class="btn whatsapp-btn"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button></div>
     </div>
   </div>
 
-  <!-- CART SECTION (fifth) -->
+  <!-- CART SECTION -->
   <div id="cart-section" class="section-container">
-    <div class="container">
-      <div class="section-title"><i class="fas fa-shopping-bag"></i> 🛒 Your Cart</div>
-      <div class="cart-side">
-        <div id="cartItemsList"><div class="order-item">✨ Cart empty — add drinks above</div></div>
-        <div id="cartTotal" style="font-weight:800; margin:14px 0; font-size:1.3rem;">Total: R 0.00</div>
-        <div class="pay-methods" style="display:flex; gap:12px; flex-wrap:wrap;">
-          <span class="badge-cod" style="background:#6f4cd9;">💰 Cash on delivery</span>
-          <span class="badge-cod" style="background:#3a2b70;">💳 Card on delivery</span>
-          <span><i class="fab fa-yoco"></i> Yoco / Visa</span>
-        </div>
-        <button id="checkoutBtn" class="btn" style="width:100%; justify-content:center;"><i class="fas fa-lock"></i> Proceed to Checkout</button>
-      </div>
+    <div class="section-title animate-letters">🛒 Your Cart</div>
+    <div class="cart-side">
+      <div id="cartItemsList"><div class="order-item">✨ Cart empty — add drinks above</div></div>
+      <div id="cartTotal" style="font-weight:700; margin:16px 0; font-size:1.3rem;">Total: R 0.00</div>
+      <div id="deliveryFeeMsg" style="font-size:0.85rem; color:#666; margin-bottom:12px;">*Delivery fee will be calculated based on your location</div>
+      <button id="whatsappCartBtn" class="btn whatsapp-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</button>
     </div>
   </div>
-</main>
 
-<footer>
-  <p>© 2025 Village Bev — Purple Edition • Drink responsibly 18+</p>
-</footer>
+  <footer>
+    <p>© 2025 Village Bev — Premium Liquor • Drink responsibly 18+</p>
+  </footer>
+</main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // ========== PRODUCTS WITH SIZE OPTIONS ==========
-  // Wine: 1L and 3L | Beer: 500ml and 750ml | Savanna: 330ml Can, 500ml Bottle, 500ml Can (updated)
+  // ========== PRODUCTS WITH SIZE OPTIONS & IMAGE PLACEHOLDERS ==========
   const productsData = [
-    { id:1, name:"4th Street Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 } },
-    { id:2, name:"Robertson Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":65, "3L":170 } },
-    { id:3, name:"Robertson Sweet Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":70, "3L":185 } },
-    { id:4, name:"Drostdy Hof Adelpracht", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":52, "3L":138 } },
-    { id:5, name:"Autumn Harvest Perlé Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":45, "3L":119 } },
-    { id:6, name:"4th Street Wine", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 } },
-    { id:7, name:"Black Label Beer", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
-    { id:8, name:"Castle Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":18, "750ml":26 } },
-    { id:9, name:"Castle Lite", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
-    { id:10, name:"Heineken", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 } },
-    { id:11, name:"Amstel Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
-    { id:12, name:"Corona", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
-    { id:13, name:"Windhoek", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 } },
-    { id:14, name:"Stella Artois", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":21, "750ml":29 } },
-    { id:15, name:"Flying Fish", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 } },
-    // Savanna: 330ml Can, 500ml Bottle, 500ml Can (updated from 330ml Bottle to 330ml Can)
-    { id:16, name:"Savanna Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 } },
-    { id:17, name:"Savanna Light", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 } },
-    { id:18, name:"Hunters Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":22, "500ml Bottle":32 } },
-    { id:19, name:"Brutal Fruit Ruby Apple", category:"Ciders", sizes:["330ml Can","500ml Can"], priceMap:{ "330ml Can":26, "500ml Can":38 } },
-    { id:20, name:"Bernini Blush", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":20, "500ml Bottle":30 } },
-    { id:21, name:"Annabelle Cuvée Blanche", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":20 } },
-    { id:22, name:"JC Le Roux Le Domaine", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":110 } },
-    { id:23, name:"Red Bull", category:"Cold Drinks", sizes:["250ml"], priceMap:{ "250ml":20 } },
-    { id:24, name:"Schweppes Lemonade", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":20 } },
-    { id:25, name:"Coca Cola", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":13 } },
-    { id:26, name:"Tanqueray Gin", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":350 } },
-    { id:27, name:"Jameson Whiskey", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":160 } },
-    { id:28, name:"Jack Daniel's", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":50 } },
-    { id:29, name:"Jägermeister", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":28 } },
-    { id:30, name:"Bug Red Shooter", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":16 } }
+    { id:1, name:"4th Street Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 }, img:"" },
+    { id:2, name:"Robertson Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":65, "3L":170 }, img:"" },
+    { id:3, name:"Robertson Sweet Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":70, "3L":185 }, img:"" },
+    { id:4, name:"Drostdy Hof Adelpracht", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":52, "3L":138 }, img:"" },
+    { id:5, name:"Black Label Beer", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 }, img:"" },
+    { id:6, name:"Castle Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":18, "750ml":26 }, img:"" },
+    { id:7, name:"Heineken", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 }, img:"" },
+    { id:8, name:"Amstel Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 }, img:"" },
+    { id:9, name:"Savanna Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 }, img:"" },
+    { id:10, name:"Savanna Light", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 }, img:"" },
+    { id:11, name:"Hunters Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":22, "500ml Bottle":32 }, img:"" },
+    { id:12, name:"Brutal Fruit", category:"Ciders", sizes:["330ml Can","500ml Can"], priceMap:{ "330ml Can":26, "500ml Can":38 }, img:"" },
+    { id:13, name:"Annabelle Cuvée", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":20 }, img:"" },
+    { id:14, name:"JC Le Roux", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":110 }, img:"" },
+    { id:15, name:"Red Bull", category:"Cold Drinks", sizes:["250ml"], priceMap:{ "250ml":20 }, img:"" },
+    { id:16, name:"Schweppes Lemonade", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":20 }, img:"" },
+    { id:17, name:"Coca Cola", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":13 }, img:"" },
+    { id:18, name:"Tanqueray Gin", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":350 }, img:"" },
+    { id:19, name:"Jameson Whiskey", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":160 }, img:"" },
+    { id:20, name:"Jack Daniel's", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":50 }, img:"" },
+    { id:21, name:"Jägermeister", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":28 }, img:"" }
   ];
 
   let cart = [];
@@ -571,8 +654,12 @@
     const filtered = filterCat === "all" ? productsData : productsData.filter(p => p.category === filterCat);
     container.innerHTML = filtered.map(p => {
       const sizeOptions = p.sizes.map(sz => `<option value="${sz}">${sz} - R ${p.priceMap[sz]}</option>`).join('');
+      const imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<div style="background:#f5f5f5; width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-image"></i> Add image</div>`;
       return `
         <div class="product-card">
+          <div class="product-img" onclick="promptImage(${p.id}, '${p.name.replace(/'/g, "\\'")}')" style="cursor:pointer;">
+            ${imgHtml}
+          </div>
           <div class="product-cat">${p.category}</div>
           <div class="product-name">${p.name}</div>
           <select class="size-select" id="size-${p.id}">
@@ -584,9 +671,17 @@
     }).join("");
   }
 
+  window.promptImage = (id, name) => {
+    const url = prompt(`Enter image URL for ${name}:`, "https://placehold.co/200x200/eee/333?text=Product");
+    if(url) {
+      const product = productsData.find(p => p.id === id);
+      if(product) product.img = url;
+      renderProducts(currentFilter);
+    }
+  };
+
   window.addToCartWithSize = (id, name) => {
     const product = productsData.find(p => p.id === id);
-    if (!product) return;
     const sizeSelect = document.getElementById(`size-${id}`);
     const selectedSize = sizeSelect.value;
     const price = product.priceMap[selectedSize];
@@ -607,23 +702,47 @@
     let html = "";
     cart.forEach((item, idx) => {
       total += item.price * item.qty;
-      html += `<div class="order-item"><span><strong>${item.name}</strong> (${item.size}) x${item.qty}</span><span>R ${(item.price * item.qty).toFixed(2)}</span> <button style="background:none; border:none; color:#b77eff; cursor:pointer;" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button></div>`;
+      html += `<div class="order-item"><span><strong>${item.name}</strong> (${item.size}) x${item.qty}</span><span>R ${(item.price * item.qty).toFixed(2)}</span> <button style="background:none; border:none; color:#ff4444; cursor:pointer;" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button></div>`;
     });
     cartDiv.innerHTML = html;
     document.getElementById("cartTotal").innerHTML = `Total: R ${total.toFixed(2)}`;
   }
 
-  window.removeFromCart = (idx) => {
-    cart.splice(idx,1);
-    updateCartUI();
-  };
+  window.removeFromCart = (idx) => { cart.splice(idx,1); updateCartUI(); };
 
-  document.getElementById("checkoutBtn").addEventListener("click", () => {
-    if(cart.length === 0) alert("🛒 Add some drinks first!");
-    else alert("✅ Order placed! Pay on delivery (cash/card) or via Yoco. Village Bev delivers within 30min in Thohoyandou. Cheers!");
-  });
+  // WhatsApp Order Function
+  function sendWhatsAppOrder() {
+    if(cart.length === 0) {
+      alert("Your cart is empty. Add some drinks first!");
+      return;
+    }
+    // Get user location
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        sendOrderWithLocation(lat, lng);
+      }, () => {
+        sendOrderWithLocation(null, null);
+      });
+    } else {
+      sendOrderWithLocation(null, null);
+    }
+  }
 
-  // filter buttons
+  function sendOrderWithLocation(lat, lng) {
+    let itemsList = cart.map(item => `${item.name} (${item.size}) x${item.qty} = R${(item.price * item.qty).toFixed(2)}`).join('%0A');
+    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    let locationText = lat && lng ? `Location: https://maps.google.com/?q=${lat},${lng}` : "Location not shared - please provide address";
+    let message = `🍺 *NEW ORDER - VILLAGE BEV* 🍺%0A%0A*ITEMS:*%0A${itemsList}%0A%0A*TOTAL: R${total.toFixed(2)}*%0A%0A*Delivery:* Delivery fee will be calculated based on distance.%0A%0A${locationText}%0A%0A*Customer Note:* Please confirm delivery fee and ETA.`;
+    let whatsappUrl = `https://wa.me/27825934659?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  document.getElementById("whatsappCartBtn")?.addEventListener("click", sendWhatsAppOrder);
+  document.getElementById("whatsappOrderBtn")?.addEventListener("click", sendWhatsAppOrder);
+
+  // Filter buttons
   document.querySelectorAll(".cat-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
@@ -634,58 +753,69 @@
   });
 
   window.changeEventPhoto = () => {
-    let newUrl = prompt("Enter new event image URL:", "https://placehold.co/900x400/6845c0/eeddff?text=NEW+EVENT");
-    if(newUrl) document.getElementById("dynamicEventPhoto").src = newUrl;
+    let url = prompt("Enter new event image URL:");
+    if(url) document.getElementById("dynamicEventPhoto").src = url;
   };
 
   // Map
   const map = L.map('map').setView([-22.978815, 30.433430], 16);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-  L.marker([-22.978815, 30.433430]).addTo(map).bindPopup('<b>🍇 VILLAGE BEV</b><br/>Main store Thohoyandou').openPopup();
+  L.marker([-22.978815, 30.433430]).addTo(map).bindPopup('<b>VILLAGE BEV</b><br/>Main Store').openPopup();
 
-  // Intersection Observer for section reveal
-  const sections = document.querySelectorAll('.section-container');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
-  sections.forEach(section => observer.observe(section));
-
-  // Scroll to section function
-  window.scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if(element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Scroll & Animation Logic
+  window.scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    closeSidebar();
+  };
+  window.scrollToContent = () => {
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  // Sidebar menu functionality
-  const menuBtn = document.getElementById('menuButton');
-  const sidebar = document.getElementById('sidebarMenu');
-  const overlay = document.getElementById('overlay');
-  const closeMenuBtn = document.getElementById('closeMenu');
+  // Hide hero video on scroll
+  window.addEventListener('scroll', () => {
+    const hero = document.getElementById('heroVideo');
+    if(window.scrollY > 100) {
+      hero.style.opacity = '0';
+      hero.style.transition = 'opacity 0.5s';
+    } else {
+      hero.style.opacity = '1';
+    }
+  });
 
-  function openSidebar() {
-    sidebar.classList.add('open');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  menuBtn.addEventListener('click', openSidebar);
-  closeMenuBtn.addEventListener('click', closeSidebar);
-  overlay.addEventListener('click', closeSidebar);
+  // Letter-by-letter animation on scroll
+  const animateElements = document.querySelectorAll('.animate-letters');
+  const observerLetters = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        const text = entry.target.innerText;
+        entry.target.innerHTML = text.split('').map(char => `<span class="letter">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+        entry.target.classList.add('visible');
+        const letters = entry.target.querySelectorAll('.letter');
+        letters.forEach((letter, i) => {
+          setTimeout(() => { letter.style.opacity = '1'; letter.style.transform = 'translateY(0)'; }, i * 30);
+        });
+        observerLetters.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  animateElements.forEach(el => observerLetters.observe(el));
 
-  // Hide global loader after page loads
+  // Sidebar
+  const menuBtn = document.getElementById('menuButton'), sidebar = document.getElementById('sidebarMenu'), overlay = document.getElementById('overlay'), closeMenu = document.getElementById('closeMenu');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+  menuBtn?.addEventListener('click', openSidebar);
+  closeMenu?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Loader
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('globalLoader').classList.add('hidden');
-      sections.forEach(section => section.classList.add('visible'));
-    }, 800);
+    setTimeout(() => { document.getElementById('globalLoader').classList.add('hidden'); }, 800);
     renderProducts("all");
+    // Add image upload prompts for each product (optional)
   });
 </script>
 </body>
 </html>
+```
