@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Village Bev | Premium Liquor Store</title>
-  <!-- Google Fonts + Font Awesome -->
+  <title>Village Bev | Premium Liquor • Thohoyandou</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     * {
@@ -59,7 +57,7 @@
       pointer-events: none;
     }
 
-    /* HERO VIDEO BACKGROUND */
+    /* Hero Video Background */
     .hero-video-container {
       position: fixed;
       top: 0;
@@ -98,17 +96,24 @@
       max-width: 700px;
       pointer-events: none;
     }
-    .hero-content h1 {
-      font-size: 3.5rem;
+    .hero-content .logo-circle-img {
+      width: 100px;
+      height: 100px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin: 0 auto 20px;
+      border: 2px solid #d4af37;
+    }
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 800;
       letter-spacing: -0.02em;
     }
-    .hero-content p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    /* Scroll indicator */
     .scroll-indicator {
       position: fixed;
       bottom: 30px;
@@ -125,7 +130,7 @@
       50% { transform: translateX(-50%) translateY(10px); }
     }
 
-    /* Main Content - appears after scroll */
+    /* Main Content */
     .main-content {
       position: relative;
       z-index: 10;
@@ -135,14 +140,12 @@
       box-shadow: 0 -20px 40px rgba(0,0,0,0.1);
     }
 
-    /* Header */
     header {
       background: #ffffff;
       position: sticky;
       top: 0;
       z-index: 100;
       border-bottom: 1px solid #eaeaea;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     }
     .navbar {
       max-width: 1400px;
@@ -154,13 +157,12 @@
       flex-wrap: wrap;
       gap: 20px;
     }
-
-    /* Logo Circle */
     .logo-circle {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
+      cursor: pointer;
     }
     .logo-circle-img {
       width: 55px;
@@ -173,9 +175,7 @@
       color: white;
       font-weight: 800;
       font-size: 1.4rem;
-      letter-spacing: 1px;
       border: 2px solid #d4af37;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .logo-text {
       font-weight: 800;
@@ -189,7 +189,6 @@
       color: #666;
       display: block;
     }
-
     .menu-btn {
       background: #000000;
       color: white;
@@ -205,10 +204,9 @@
     }
     .menu-btn:hover {
       background: #333;
-      transform: scale(1.02);
     }
 
-    /* Sidebar */
+    /* Sidebar Menu */
     .sidebar-menu {
       position: fixed;
       top: 0;
@@ -235,7 +233,7 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    .sidebar-menu a:hover { padding-left: 12px; color: #000; background: #f5f5f5; }
+    .sidebar-menu a:hover { padding-left: 12px; background: #f5f5f5; }
     .close-menu {
       position: absolute;
       top: 20px;
@@ -272,98 +270,7 @@
       padding-left: 20px;
     }
 
-    /* Letter-by-letter animation */
-    .animate-letters {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .animate-letters.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .letter {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.05s ease-out;
-    }
-
-    /* Product Grid */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 30px;
-    }
-    .product-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 20px;
-      transition: 0.25s;
-      border: 1px solid #eaeaea;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-      border-color: #ccc;
-    }
-    .product-img {
-      width: 100%;
-      height: 160px;
-      background: #f8f8f8;
-      border-radius: 16px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 0.8rem;
-      overflow: hidden;
-    }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .product-cat {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #666;
-      text-transform: uppercase;
-    }
-    .product-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin: 8px 0;
-    }
-    .size-select {
-      width: 100%;
-      padding: 10px;
-      margin: 12px 0;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      background: #fff;
-    }
-    .btn {
-      background: #000000;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 40px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn:hover {
-      background: #333;
-    }
-
+    /* Filters */
     .cat-filters {
       display: flex;
       flex-wrap: wrap;
@@ -384,7 +291,88 @@
       color: white;
     }
 
-    /* Info Cards */
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 20px;
+      transition: 0.25s;
+      border: 1px solid #eaeaea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      border-color: #ccc;
+    }
+    .product-img {
+      width: 100%;
+      height: 180px;
+      background: #f8f8f8;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .product-cat {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+    .flavor-select, .size-select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 0.85rem;
+    }
+    .product-price {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 8px 0;
+      color: #000;
+    }
+    .btn {
+      background: #000000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .btn:hover {
+      background: #333;
+    }
+
+    /* Delivery & Info Cards */
     .info-cards {
       display: flex;
       flex-wrap: wrap;
@@ -392,6 +380,7 @@
       background: #fafafa;
       border-radius: 32px;
       padding: 32px;
+      margin-top: 60px;
     }
     .info-box {
       flex: 1;
@@ -404,11 +393,10 @@
     }
     .whatsapp-btn {
       background: #25D366;
-      color: white;
-      border: none;
-      margin-top: 12px;
     }
-    .whatsapp-btn:hover { background: #128C7E; }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+    }
 
     /* Party Zone */
     .events-showcase {
@@ -447,12 +435,17 @@
       height: 140px;
       object-fit: cover;
     }
+    .photo-gallery-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
     .gallery-thumb {
       width: 100px;
       height: 100px;
       border-radius: 16px;
       object-fit: cover;
-      border: 2px solid #eee;
     }
     .map-container {
       height: 380px;
@@ -490,15 +483,15 @@
   <div class="loading-text">VILLAGE BEV</div>
 </div>
 
-<!-- Hero Video Background (autoplay muted, no controls, disappears on scroll) -->
+<!-- Hero Video Background -->
 <div class="hero-video-container" id="heroVideo">
-  <video autoplay muted loop playsinline id="bgVideo">
+  <video autoplay muted loop playsinline>
     <source src="https://assets.mixkit.co/videos/preview/mixkit-pouring-beer-into-a-glass-32645-large.mp4" type="video/mp4">
   </video>
 </div>
 <div class="hero-overlay"></div>
 <div class="hero-content">
-  <div class="logo-circle-img" style="width: 100px; height: 100px; font-size: 2rem; margin: 0 auto 20px; background: rgba(0,0,0,0.6); border: 2px solid #d4af37;">VB</div>
+  <div class="logo-circle-img">VB</div>
   <h1>VILLAGE BEV</h1>
   <p>Premium liquor • Fastest delivery in Thohoyandou</p>
 </div>
@@ -509,7 +502,7 @@
 <main class="main-content" id="mainContent">
   <header>
     <div class="navbar">
-      <div class="logo-circle">
+      <div class="logo-circle" id="logoHome">
         <div class="logo-circle-img">VB</div>
         <div class="logo-text">VILLAGE BEV<span>Venda's #1 choice</span></div>
       </div>
@@ -529,7 +522,7 @@
 
   <!-- DRINKS SECTION -->
   <div id="drinks-section" class="section-container">
-    <div class="section-title animate-letters"><span class="letter-animate">🍾 Drinks Menu • Choose your size</span></div>
+    <div class="section-title">🍾 Drinks Menu • Select flavor & size</div>
     <div class="cat-filters" id="categoryFilters">
       <button class="cat-btn active" data-cat="all">All Drinks</button>
       <button class="cat-btn" data-cat="Beer">Beer</button>
@@ -545,7 +538,7 @@
 
   <!-- PARTY ZONE -->
   <div id="party-section" class="section-container">
-    <div class="section-title animate-letters">🎉 Party Zone • Events & Vibes</div>
+    <div class="section-title">🎉 Party Zone • Events & Vibes</div>
     <div class="events-showcase">
       <div class="featured-event">
         <h2>UPCOMING: PURPLE HAZE FEST</h2>
@@ -554,46 +547,29 @@
         <button onclick="changeEventPhoto()" class="btn" style="background:#333;"><i class="fas fa-camera"></i> Change Event Photo</button>
       </div>
       <h3>📸 Party Memories</h3>
-      <div class="photo-gallery-row" style="display:flex; gap:12px; flex-wrap:wrap; margin:20px 0;">
+      <div class="photo-gallery-row">
         <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+1">
         <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+2">
         <img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+3">
       </div>
       <h3>🎥 Video Memories</h3>
-      <div class="video-grid" id="videoGrid">
-        <!-- Video elements with controls, muted initially but full controls -->
-        <div class="video-card">
-          <video controls muted preload="metadata">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4">
-          </video>
-          <p style="padding:8px;">Cheers moment</p>
-        </div>
-        <div class="video-card">
-          <video controls muted preload="metadata">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4">
-          </video>
-          <p style="padding:8px;">Party vibe</p>
-        </div>
-        <div class="video-card">
-          <video controls muted preload="metadata">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-dancing-at-a-party-32807-large.mp4" type="video/mp4">
-          </video>
-          <p style="padding:8px;">Dance floor</p>
-        </div>
+      <div class="video-grid">
+        <div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4"></video><p>Cheers moment</p></div>
+        <div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4"></video><p>DJ night</p></div>
       </div>
     </div>
   </div>
 
   <!-- LOCATION -->
   <div id="location-section" class="section-container">
-    <div class="section-title animate-letters">📍 Our Location • Thohoyandou</div>
+    <div class="section-title">📍 Our Location • Thohoyandou</div>
     <div id="map" class="map-container"></div>
     <p style="text-align:center; margin-top:12px;"><i class="fas fa-location-dot"></i> <strong>GPS: -22.978815, 30.433430</strong></p>
   </div>
 
-  <!-- DELIVERY SECTION with WhatsApp -->
+  <!-- DELIVERY SECTION -->
   <div id="delivery-section" class="section-container">
-    <div class="section-title animate-letters">🚚 Delivery & Opening Times</div>
+    <div class="section-title">🚚 Delivery & Opening Times</div>
     <div class="info-cards">
       <div class="info-box"><i class="fas fa-truck-fast"></i><h3>30-MIN DELIVERY</h3><p>Thohoyandou & Venda</p><p><strong>Delivery fee based on distance</strong></p></div>
       <div class="info-box"><i class="fas fa-store"></i><h3>Opening Hours</h3><p>Mon-Thu: 9:00–22:00<br>Fri-Sat: 9:00–23:30<br>Sun: 10:00–18:00</p></div>
@@ -603,11 +579,11 @@
 
   <!-- CART SECTION -->
   <div id="cart-section" class="section-container">
-    <div class="section-title animate-letters">🛒 Your Cart</div>
+    <div class="section-title">🛒 Your Cart</div>
     <div class="cart-side">
       <div id="cartItemsList"><div class="order-item">✨ Cart empty — add drinks above</div></div>
       <div id="cartTotal" style="font-weight:700; margin:16px 0; font-size:1.3rem;">Total: R 0.00</div>
-      <div id="deliveryFeeMsg" style="font-size:0.85rem; color:#666; margin-bottom:12px;">*Delivery fee will be calculated based on your location</div>
+      <div id="deliveryFeeMsg" style="font-size:0.85rem; color:#666; margin-bottom:12px;">*Delivery fee calculated based on your location</div>
       <button id="whatsappCartBtn" class="btn whatsapp-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</button>
     </div>
   </div>
@@ -619,79 +595,114 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // ========== PRODUCTS WITH SIZE OPTIONS & IMAGE PLACEHOLDERS ==========
+  // ========== PRODUCT DATABASE (exactly as specified) ==========
   const productsData = [
-    { id:1, name:"4th Street Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":47, "3L":125 }, img:"sweetrose5l.jpg" },
-    { id:2, name:"Robertson Sweet Red", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":65, "3L":170 }, img:"" },
-    { id:3, name:"Robertson Sweet Rosé", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":70, "3L":185 }, img:"" },
-    { id:4, name:"Drostdy Hof Adelpracht", category:"Wine", sizes:["1L","3L"], priceMap:{ "1L":52, "3L":138 }, img:"drosty3l.jpg" },
-    { id:5, name:"Black Label Beer", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 }, img:"blackbottle.webp" },
-    { id:6, name:"Castle Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":18, "750ml":26 }, img:"castlelargercan.jpg" },
-    { id:7, name:"Heineken", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":23, "750ml":32 }, img:"henekencan.jpg" },
-    { id:8, name:"Amstel Lager", category:"Beer", sizes:["500ml","750ml"], priceMap:{ "500ml":20, "750ml":28 }, img:"amstelcan.png" },
-    { id:9, name:"Savanna Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 }, img:"savanacan.png" },
-    { id:10, name:"Savanna Light", category:"Ciders", sizes:["330ml Can","500ml Bottle","500ml Can"], priceMap:{ "330ml Can":22, "500ml Bottle":32, "500ml Can":32 }, img:"" },
-    { id:11, name:"Hunters Dry", category:"Ciders", sizes:["330ml Can","500ml Bottle"], priceMap:{ "330ml Can":22, "500ml Bottle":32 }, img:"huntersbottle.pnj." },
-    { id:12, name:"Brutal Fruit", category:"Ciders", sizes:["330ml Can","500ml Can"], priceMap:{ "330ml Can":26, "500ml Can":38 }, img:"brutal f bottle.jpg" },
-    { id:13, name:"Annabelle Cuvée", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":20 }, img:"" },
-    { id:14, name:"JC Le Roux", category:"Sparkling Wine", sizes:["750ml"], priceMap:{ "750ml":110 }, img:"" },
-    { id:15, name:"Red Bull", category:"Cold Drinks", sizes:["250ml"], priceMap:{ "250ml":20 }, img:"redbull.jpg" },
-    { id:16, name:"Schweppes Lemonade", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":20 }, img:"" },
-    { id:17, name:"Coca Cola", category:"Cold Drinks", sizes:["1L"], priceMap:{ "1L":13 }, img:"coke.jpg" },
-    { id:18, name:"Tanqueray Gin", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":350 }, img:"tacray.jpg" },
-    { id:19, name:"Jameson Whiskey", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":160 }, img:"Jameson.webp" },
-    { id:20, name:"Jack Daniel's", category:"Spirits", sizes:["750ml"], priceMap:{ "750ml":50 }, img:"Jack d.webp" },
-    { id:21, name:"Jägermeister", category:"Shooters", sizes:["50ml"], priceMap:{ "50ml":28 }, img:"jager.png" }
+    { id:1, name:"4th Street", category:"Wine", flavors:["sweet white","sweet red","sweet rose"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":150}, img:"https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&h=300&fit=crop" },
+    { id:2, name:"Drostdy Hof", category:"Wine", flavors:["classic"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":162}, img:"https://images.unsplash.com/photo-1506377247377-2a5b3b417bb3?w=300&h=300&fit=crop" },
+    { id:3, name:"Black Label", category:"Beer", flavors:["lager"], sizes:["Can","Big Bottle"], priceMap:{"Can":22,"Big Bottle":26}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:4, name:"Heineken", category:"Beer", flavors:["lager"], sizes:["Can","Big Bottle"], priceMap:{"Can":25,"Big Bottle":28}, img:"https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=300&h=300&fit=crop" },
+    { id:5, name:"Amstel", category:"Beer", flavors:["lager"], sizes:["Can","Big Bottle"], priceMap:{"Can":22,"Big Bottle":24}, img:"https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=300&h=300&fit=crop" },
+    { id:6, name:"Savanna", category:"Ciders", flavors:["dry","light"], sizes:["Small Bottle","Big Bottle","Can"], priceMap:{"Small Bottle":25,"Big Bottle":32,"Can":29}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:7, name:"Hunters Dry", category:"Ciders", flavors:["dry"], sizes:["Can","Big Bottle"], priceMap:{"Can":24,"Big Bottle":39}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:8, name:"Brutal Fruit", category:"Ciders", flavors:["strawberry","ruby","lichi"], sizes:["Can"], priceMap:{"Can":26}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:9, name:"JC Le Roux", category:"Sparkling Wine", flavors:["brut"], sizes:["Big Bottle"], priceMap:{"Big Bottle":70}, img:"https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&h=300&fit=crop" },
+    { id:10, name:"Red Bull", category:"Cold Drinks", flavors:["original"], sizes:["Small Can"], priceMap:{"Small Can":30}, img:"https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=300&h=300&fit=crop" },
+    { id:11, name:"Schweppes", category:"Cold Drinks", flavors:["dry lemon","tonic","lemonade"], sizes:["Big Bottle"], priceMap:{"Big Bottle":20}, img:"https://images.unsplash.com/photo-1622484214937-9c2d7d6a1ca2?w=300&h=300&fit=crop" },
+    { id:12, name:"Coca Cola", category:"Cold Drinks", flavors:["original"], sizes:["Can"], priceMap:{"Can":16}, img:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=300&h=300&fit=crop" },
+    { id:13, name:"Tanqueray", category:"Spirits", flavors:["gin"], sizes:["Big Bottle"], priceMap:{"Big Bottle":350}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:14, name:"Jägermeister", category:"Shooters", flavors:["herbal"], sizes:["Tiny"], priceMap:{"Tiny":30}, img:"https://images.unsplash.com/photo-1614313913007-2d4e8e9c6c2a?w=300&h=300&fit=crop" },
+    { id:15, name:"Bug Shot", category:"Shooters", flavors:["original"], sizes:["Shot"], priceMap:{"Shot":16}, img:"https://images.unsplash.com/photo-1614313913007-2d4e8e9c6c2a?w=300&h=300&fit=crop" },
+    { id:16, name:"Amarula", category:"Spirits", flavors:["cream"], sizes:["Shot","Medium Bottle","Big Bottle"], priceMap:{"Shot":28,"Medium Bottle":115,"Big Bottle":190}, img:"https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=300&h=300&fit=crop" },
+    { id:17, name:"Extreme", category:"Ciders", flavors:["original"], sizes:["Can"], priceMap:{"Can":32}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:18, name:"Paal Perpel", category:"Wine", flavors:["red"], sizes:["Big Bottle"], priceMap:{"Big Bottle":90}, img:"https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&h=300&fit=crop" },
+    { id:19, name:"Sol", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":26}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:20, name:"Belgravia", category:"Ciders", flavors:["gin & tonic","gin & dry lemon"], sizes:["Can"], priceMap:{"Can":28}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:21, name:"Bosvark", category:"Spirits", flavors:["whiskey"], sizes:["100ml"], priceMap:{"100ml":20}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:22, name:"Kipdrift", category:"Spirits", flavors:["premium"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":80}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:23, name:"1818", category:"Spirits", flavors:["whiskey"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:24, name:"Russian Beer", category:"Beer", flavors:["lager"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":64}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:25, name:"Belgravi Gin", category:"Spirits", flavors:["gin"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:26, name:"Mainstay", category:"Spirits", flavors:["passion","mojito"], sizes:["Bottle"], priceMap:{"Bottle":65}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:27, name:"B&T", category:"Spirits", flavors:["original"], sizes:["Bottle"], priceMap:{"Bottle":55}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:28, name:"Black Crown", category:"Ciders", flavors:["apple"], sizes:["Can"], priceMap:{"Can":25}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:29, name:"Chillas Punch", category:"Ciders", flavors:["mango","sunrise"], sizes:["Can"], priceMap:{"Can":26}, img:"https://images.unsplash.com/photo-1578836537282-3171d77f8632?w=300&h=300&fit=crop" },
+    { id:30, name:"Corona", category:"Beer", flavors:["lager"], sizes:["Big Bottle","Small Bottle"], priceMap:{"Big Bottle":32,"Small Bottle":22}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:31, name:"Hennessy", category:"Spirits", flavors:["cognac"], sizes:["Big Bottle"], priceMap:{"Big Bottle":650}, img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=300&h=300&fit=crop" },
+    { id:32, name:"Windhoek", category:"Beer", flavors:["lager","draft"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":28,"Can":23}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:33, name:"Chateau", category:"Sparkling Wine", flavors:["rose","red","white"], sizes:["Bottle"], priceMap:{"Bottle":22}, img:"https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&h=300&fit=crop" },
+    { id:34, name:"Reds MXD", category:"Cold Drinks", flavors:["pine","vodka & guarana"], sizes:["Bottle","Can"], priceMap:{"Bottle":32,"Can":28}, img:"https://images.unsplash.com/photo-1622484214937-9c2d7d6a1ca2?w=300&h=300&fit=crop" },
+    { id:35, name:"Latos", category:"Beer", flavors:["lager"], sizes:["Big Bottle"], priceMap:{"Big Bottle":45}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:36, name:"Bernini", category:"Sparkling Wine", flavors:["blush","classic","ember","mimosa"], sizes:["Can"], priceMap:{"Can":23}, img:"https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&h=300&fit=crop" },
+    { id:37, name:"Flying Fish", category:"Beer", flavors:["lager"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":27,"Can":22}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" },
+    { id:38, name:"Castle", category:"Beer", flavors:["double malt","lite","milk stout","lager"], sizes:["Bottle","Can"], priceMap:{"Bottle":26,"Can":20}, img:"https://images.unsplash.com/photo-1566633806327-68e152aaf26d?w=300&h=300&fit=crop" }
   ];
 
   let cart = [];
   let currentFilter = "all";
 
-  function renderProducts(filterCat = "all") {
+  function getPrice(product, flavorIdx, size) {
+    let base = product.priceMap[size];
+    if (product.name === "4th Street" && flavorIdx === 0) return base;
+    if (product.name === "Savanna" && flavorIdx === 0) return base;
+    if (product.name === "Brutal Fruit") return 26;
+    if (product.name === "Belgravia") return 28;
+    if (product.name === "Mainstay") return 65;
+    if (product.name === "Chillas Punch") return 26;
+    if (product.name === "Chateau") return 22;
+    if (product.name === "Reds MXD") return size === "Bottle" ? 32 : 28;
+    if (product.name === "Bernini") return 23;
+    if (product.name === "Castle") return size === "Bottle" ? 26 : 20;
+    return base;
+  }
+
+  function renderProducts() {
     const container = document.getElementById("productsContainer");
-    const filtered = filterCat === "all" ? productsData : productsData.filter(p => p.category === filterCat);
-    container.innerHTML = filtered.map(p => {
-      const sizeOptions = p.sizes.map(sz => `<option value="${sz}">${sz} - R ${p.priceMap[sz]}</option>`).join('');
-      const imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<div style="background:#f5f5f5; width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-image"></i> Add image</div>`;
+    const filtered = currentFilter === "all" ? productsData : productsData.filter(p => p.category === currentFilter);
+    container.innerHTML = filtered.map(product => {
+      const flavorOptions = product.flavors.map((f, idx) => `<option value="${idx}">${f.toUpperCase()}</option>`).join('');
+      const sizeOptions = product.sizes.map(sz => `<option value="${sz}">${sz}</option>`).join('');
       return `
         <div class="product-card">
-          <div class="product-img" onclick="promptImage(${p.id}, '${p.name.replace(/'/g, "\\'")}')" style="cursor:pointer;">
-            ${imgHtml}
-          </div>
-          <div class="product-cat">${p.category}</div>
-          <div class="product-name">${p.name}</div>
-          <select class="size-select" id="size-${p.id}">
-            ${sizeOptions}
-          </select>
-          <button class="btn" onclick="addToCartWithSize(${p.id}, '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+          <div class="product-img"><img src="${product.img}" alt="${product.name}"></div>
+          <div class="product-cat">${product.category}</div>
+          <div class="product-name">${product.name}</div>
+          <select class="flavor-select" data-id="${product.id}">${flavorOptions}</select>
+          <select class="size-select" data-id="${product.id}">${sizeOptions}</select>
+          <div class="product-price" id="price-${product.id}">R ${getPrice(product, 0, product.sizes[0])}</div>
+          <button class="btn" onclick="addToCart(${product.id}, '${product.name.replace(/'/g, "\\'")}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
         </div>
       `;
     }).join("");
+
+    // Attach event listeners for dynamic price update
+    document.querySelectorAll('.flavor-select, .size-select').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const productId = parseInt(select.getAttribute('data-id'));
+        const product = productsData.find(p => p.id === productId);
+        const flavorIdx = parseInt(document.querySelector(`.flavor-select[data-id="${productId}"]`).value);
+        const size = document.querySelector(`.size-select[data-id="${productId}"]`).value;
+        const price = getPrice(product, flavorIdx, size);
+        document.getElementById(`price-${productId}`).innerText = `R ${price}`;
+      });
+    });
   }
 
-  window.promptImage = (id, name) => {
-    const url = prompt(`Enter image URL for ${name}:`, "https://placehold.co/200x200/eee/333?text=Product");
-    if(url) {
-      const product = productsData.find(p => p.id === id);
-      if(product) product.img = url;
-      renderProducts(currentFilter);
-    }
-  };
-
-  window.addToCartWithSize = (id, name) => {
+  window.addToCart = (id, name) => {
     const product = productsData.find(p => p.id === id);
-    const sizeSelect = document.getElementById(`size-${id}`);
-    const selectedSize = sizeSelect.value;
-    const price = product.priceMap[selectedSize];
-    const existing = cart.find(i => i.id === id && i.size === selectedSize);
-    if(existing) existing.qty += 1;
-    else cart.push({ id, name, size: selectedSize, price, qty: 1 });
+    const flavorSelect = document.querySelector(`.flavor-select[data-id="${id}"]`);
+    const sizeSelect = document.querySelector(`.size-select[data-id="${id}"]`);
+    const flavor = product.flavors[parseInt(flavorSelect.value)];
+    const size = sizeSelect.value;
+    const price = getPrice(product, parseInt(flavorSelect.value), size);
+    const existing = cart.find(i => i.id === id && i.flavor === flavor && i.size === size);
+    if (existing) existing.qty += 1;
+    else cart.push({ id, name, flavor, size, price, qty: 1 });
     updateCartUI();
   };
 
   function updateCartUI() {
     const cartDiv = document.getElementById("cartItemsList");
-    if(cart.length === 0) {
+    if (cart.length === 0) {
       cartDiv.innerHTML = `<div class="order-item">✨ Cart empty — add drinks above</div>`;
       document.getElementById("cartTotal").innerHTML = "Total: R 0.00";
       return;
@@ -700,7 +711,7 @@
     let html = "";
     cart.forEach((item, idx) => {
       total += item.price * item.qty;
-      html += `<div class="order-item"><span><strong>${item.name}</strong> (${item.size}) x${item.qty}</span><span>R ${(item.price * item.qty).toFixed(2)}</span> <button style="background:none; border:none; color:#ff4444; cursor:pointer;" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button></div>`;
+      html += `<div class="order-item"><span><strong>${item.name}</strong> (${item.flavor}, ${item.size}) x${item.qty}</span><span>R ${(item.price * item.qty).toFixed(2)}</span> <button style="background:none; border:none; color:#ff4444; cursor:pointer;" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i></button></div>`;
     });
     cartDiv.innerHTML = html;
     document.getElementById("cartTotal").innerHTML = `Total: R ${total.toFixed(2)}`;
@@ -708,51 +719,36 @@
 
   window.removeFromCart = (idx) => { cart.splice(idx,1); updateCartUI(); };
 
-  // WhatsApp Order Function
   function sendWhatsAppOrder() {
-    if(cart.length === 0) {
-      alert("Your cart is empty. Add some drinks first!");
-      return;
-    }
-    // Get user location
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        sendOrderWithLocation(lat, lng);
-      }, () => {
-        sendOrderWithLocation(null, null);
-      });
-    } else {
-      sendOrderWithLocation(null, null);
-    }
+    if (cart.length === 0) { alert("Your cart is empty."); return; }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => sendOrderWithLocation(pos.coords.latitude, pos.coords.longitude), () => sendOrderWithLocation(null, null));
+    } else { sendOrderWithLocation(null, null); }
   }
-
   function sendOrderWithLocation(lat, lng) {
-    let itemsList = cart.map(item => `${item.name} (${item.size}) x${item.qty} = R${(item.price * item.qty).toFixed(2)}`).join('%0A');
-    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    let itemsList = cart.map(item => `${item.name} (${item.flavor}, ${item.size}) x${item.qty} = R${(item.price * item.qty).toFixed(2)}`).join('%0A');
+    let total = cart.reduce((s,i) => s + (i.price * i.qty), 0);
     let locationText = lat && lng ? `Location: https://maps.google.com/?q=${lat},${lng}` : "Location not shared - please provide address";
-    let message = `🍺 *NEW ORDER - VILLAGE BEV* 🍺%0A%0A*ITEMS:*%0A${itemsList}%0A%0A*TOTAL: R${total.toFixed(2)}*%0A%0A*Delivery:* Delivery fee will be calculated based on distance.%0A%0A${locationText}%0A%0A*Customer Note:* Please confirm delivery fee and ETA.`;
-    let whatsappUrl = `https://wa.me/27825934659?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    let message = `🍺 *NEW ORDER - VILLAGE BEV* 🍺%0A%0A*ITEMS:*%0A${itemsList}%0A%0A*TOTAL: R${total.toFixed(2)}*%0A%0A*Delivery:* Delivery fee based on distance.%0A%0A${locationText}`;
+    window.open(`https://wa.me/27825934659?text=${message}`, '_blank');
   }
 
   document.getElementById("whatsappCartBtn")?.addEventListener("click", sendWhatsAppOrder);
   document.getElementById("whatsappOrderBtn")?.addEventListener("click", sendWhatsAppOrder);
 
-  // Filter buttons
+  // Filters
   document.querySelectorAll(".cat-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentFilter = btn.getAttribute("data-cat");
-      renderProducts(currentFilter);
+      renderProducts();
     });
   });
 
   window.changeEventPhoto = () => {
     let url = prompt("Enter new event image URL:");
-    if(url) document.getElementById("dynamicEventPhoto").src = url;
+    if (url) document.getElementById("dynamicEventPhoto").src = url;
   };
 
   // Map
@@ -760,58 +756,21 @@
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
   L.marker([-22.978815, 30.433430]).addTo(map).bindPopup('<b>VILLAGE BEV</b><br/>Main Store').openPopup();
 
-  // Scroll & Animation Logic
-  window.scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    closeSidebar();
-  };
-  window.scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-  };
+  // Scroll functions
+  window.scrollToContent = () => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+  window.scrollToSection = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); closeSidebar(); };
+  window.closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; };
+  window.openSidebar = () => { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
 
-  // Hide hero video on scroll
-  window.addEventListener('scroll', () => {
-    const hero = document.getElementById('heroVideo');
-    if(window.scrollY > 100) {
-      hero.style.opacity = '0';
-      hero.style.transition = 'opacity 0.5s';
-    } else {
-      hero.style.opacity = '1';
-    }
-  });
-
-  // Letter-by-letter animation on scroll
-  const animateElements = document.querySelectorAll('.animate-letters');
-  const observerLetters = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        const text = entry.target.innerText;
-        entry.target.innerHTML = text.split('').map(char => `<span class="letter">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-        entry.target.classList.add('visible');
-        const letters = entry.target.querySelectorAll('.letter');
-        letters.forEach((letter, i) => {
-          setTimeout(() => { letter.style.opacity = '1'; letter.style.transform = 'translateY(0)'; }, i * 30);
-        });
-        observerLetters.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  animateElements.forEach(el => observerLetters.observe(el));
-
-  // Sidebar
-  const menuBtn = document.getElementById('menuButton'), sidebar = document.getElementById('sidebarMenu'), overlay = document.getElementById('overlay'), closeMenu = document.getElementById('closeMenu');
-  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+  const menuBtn = document.getElementById('menuButton'), sidebar = document.getElementById('sidebarMenu'), overlay = document.getElementById('overlay'), closeMenuBtn = document.getElementById('closeMenu');
   menuBtn?.addEventListener('click', openSidebar);
-  closeMenu?.addEventListener('click', closeSidebar);
+  closeMenuBtn?.addEventListener('click', closeSidebar);
   overlay?.addEventListener('click', closeSidebar);
+  document.getElementById('logoHome')?.addEventListener('click', () => scrollToSection('drinks-section'));
 
-  // Loader
   window.addEventListener('load', () => {
-    setTimeout(() => { document.getElementById('globalLoader').classList.add('hidden'); }, 800);
-    renderProducts("all");
-    // Add image upload prompts for each product (optional)
+    setTimeout(() => document.getElementById('globalLoader')?.classList.add('hidden'), 1500);
+    renderProducts();
   });
 </script>
 </body>
