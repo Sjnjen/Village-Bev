@@ -57,7 +57,7 @@
       pointer-events: none;
     }
 
-    /* Hero Video Background */
+    /* Hero Video Background - FIXED for instant play and repeat */
     .hero-video-container {
       position: fixed;
       top: 0;
@@ -69,10 +69,16 @@
       pointer-events: none;
     }
     .hero-video-container video {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0.4;
     }
     .hero-overlay {
       position: fixed;
@@ -483,9 +489,9 @@
   <div class="loading-text">VILLAGE BEV</div>
 </div>
 
-<!-- Hero Video Background -->
+<!-- Hero Video Background - FIXED: plays immediately and repeats -->
 <div class="hero-video-container" id="heroVideo">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline preload="auto" id="bgVideo">
     <source src="petal_20260331_115516.mp4" type="video/mp4">
   </video>
 </div>
@@ -595,6 +601,29 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // Force video to play immediately and loop properly
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('bgVideo');
+    if (video) {
+      // Ensure video plays
+      video.play().catch(function(e) {
+        console.log("Auto-play prevented, user interaction needed");
+        // Fallback: add click anywhere to play
+        document.body.addEventListener('click', function playVideo() {
+          video.play();
+          document.body.removeEventListener('click', playVideo);
+        });
+      });
+      
+      // Double-check loop
+      video.loop = true;
+      video.setAttribute('loop', '');
+      
+      // Force reload if needed
+      video.load();
+    }
+  });
+
   // ========== PRODUCT DATABASE WITH IMAGE FILENAMES ==========
   // All images use the exact filenames you provided - place them in the same folder as this HTML file
   const productsData = [
