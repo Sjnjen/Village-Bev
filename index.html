@@ -335,7 +335,7 @@
 <div class="hero-overlay"></div>
 <div class="hero-content">
   <div class="hero-logo" id="heroLogoArea">
-    <img id="heroLogoImg" src="logo.png" alt="Village Bev Logo" onerror="this.onerror=null; this.src='https://placehold.co/200x200/000000/d4af37?text=VB';">
+    <img id="heroLogoImg" src="logo1.png" alt="Village Bev Logo" onerror="this.onerror=null; this.src='https://placehold.co/200x200/000000/d4af37?text=VB';">
   </div>
   <h1>VILLAGE BEV</h1>
   <p>Premium liquor • Fastest delivery in Thohoyandou</p>
@@ -379,7 +379,7 @@
     <div class="navbar">
       <div class="logo-circle" id="logoHome">
         <div class="logo-circle-img" id="headerLogoImg">
-          <img id="headerLogoIcon" src="logo.png" alt="VB" onerror="this.onerror=null; this.src='https://placehold.co/55x55/000000/white?text=VB';">
+          <img id="headerLogoIcon" src="logo1.png" alt="VB" onerror="this.onerror=null; this.src='https://placehold.co/55x55/000000/white?text=VB';">
         </div>
         <div class="logo-text">VILLAGE BEV<span>Venda's #1 choice</span></div>
       </div>
@@ -484,57 +484,50 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   (function(){
-    // ========== COMPLETE PRODUCT DATABASE ==========
+    // ========== YOUR EXACT PRODUCT DATABASE (42 ITEMS) ==========
     const productsData = [
-      // Wines
       { id:1, name:"4th Street", category:"Wine", flavors:["sweet white","sweet red","sweet rose"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":150}, img:"4th street.png" },
       { id:2, name:"Drostdy Hof", category:"Wine", flavors:["classic"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":162}, img:"drostdy hof.webp" },
-      { id:17, name:"Namaqua", category:"Wine", flavors:["sweet white","sweet red"], sizes:["1L","3L"], priceMap:{"1L":45,"3L":135}, img:"namaqua.png" },
-      { id:18, name:"Robertson", category:"Wine", flavors:["sweet white","sweet red"], sizes:["1L","3L"], priceMap:{"1L":50,"3L":145}, img:"robertson.png" },
-      // Beers
       { id:3, name:"Black Label", category:"Beer", flavors:["lager"], sizes:["330ml","750ml"], priceMap:{"330ml":22,"750ml":26}, img:"black label.webp" },
       { id:4, name:"Heineken", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":25,"650ml":28}, img:"haineken.webp" },
       { id:5, name:"Amstel", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":22,"650ml":24}, img:"amstel.png" },
-      { id:19, name:"Castle Lite", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":22,"650ml":25}, img:"castle lite.png" },
-      { id:20, name:"Castle", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":22,"650ml":24}, img:"castle.png" },
-      { id:21, name:"Budweiser", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":24,"650ml":27}, img:"budweiser.webp" },
-      { id:22, name:"Corona", category:"Beer", flavors:["lager"], sizes:["330ml","500ml"], priceMap:{"330ml":28,"500ml":35}, img:"corona.webp" },
-      { id:23, name:"Hansa Pilsener", category:"Beer", flavors:["pilsener"], sizes:["500ml","650ml"], priceMap:{"500ml":20,"650ml":22}, img:"hansa.png" },
-      { id:24, name:"Windhoek", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":23,"650ml":26}, img:"windhoek.png" },
-      // Ciders
       { id:6, name:"Savanna", category:"Ciders", flavors:["dry","light"], sizes:["330ml","500ml","Can 500ml"], priceMap:{"330ml":25,"500ml":32,"Can 500ml":29}, img:"savana.png" },
       { id:7, name:"Hunters Dry", category:"Ciders", flavors:["dry"], sizes:["440ml","660ml"], priceMap:{"440ml":24,"660ml":30}, img:"hunters.png" },
       { id:8, name:"Brutal Fruit", category:"Ciders", flavors:["strawberry","ruby","lichi"], sizes:["500ml"], priceMap:{"500ml":26}, img:"brutal fruit.webp" },
-      { id:25, name:"Flying Fish", category:"Ciders", flavors:["apple","pear"], sizes:["500ml","650ml"], priceMap:{"500ml":23,"650ml":28}, img:"flying fish.png" },
-      { id:26, name:"Bernini", category:"Ciders", flavors:["original"], sizes:["330ml","750ml"], priceMap:{"330ml":22,"750ml":45}, img:"bernini.png" },
-      // Sparkling
-      { id:9, name:"JC Le Roux", category:"Sparkling Wine", flavors:["brut","rose"], sizes:["750ml"], priceMap:{"750ml":70}, img:"jc le Roux.webp" },
-      { id:27, name:"Veuve Clicquot", category:"Sparkling Wine", flavors:["brut"], sizes:["750ml"], priceMap:{"750ml":850}, img:"veuve.png" },
-      { id:28, name:"Moët & Chandon", category:"Sparkling Wine", flavors:["imperial"], sizes:["750ml"], priceMap:{"750ml":780}, img:"moet.webp" },
-      // Cold Drinks
-      { id:10, name:"Red Bull", category:"Cold Drinks", flavors:["original","sugar free"], sizes:["250ml"], priceMap:{"250ml":30}, img:"red bull.webp" },
+      { id:9, name:"JC Le Roux", category:"Sparkling Wine", flavors:["brut"], sizes:["750ml"], priceMap:{"750ml":70}, img:"jc le Roux.webp" },
+      { id:10, name:"Red Bull", category:"Cold Drinks", flavors:["original"], sizes:["250ml"], priceMap:{"250ml":30}, img:"red bull.webp" },
       { id:11, name:"Schweppes", category:"Cold Drinks", flavors:["dry lemon","tonic","lemonade"], sizes:["1L"], priceMap:{"1L":20}, img:"schweppers.webp" },
-      { id:12, name:"Coca Cola", category:"Cold Drinks", flavors:["original","diet","zero"], sizes:["440ml","1L","2L"], priceMap:{"440ml":16,"1L":22,"2L":32}, img:"cola.webp" },
-      { id:29, name:"Sprite", category:"Cold Drinks", flavors:["original"], sizes:["440ml","1L"], priceMap:{"440ml":16,"1L":22}, img:"sprite.webp" },
-      { id:30, name:"Fanta", category:"Cold Drinks", flavors:["orange","grape"], sizes:["440ml","1L"], priceMap:{"440ml":16,"1L":22}, img:"fanta.png" },
-      // Spirits
+      { id:12, name:"Coca Cola", category:"Cold Drinks", flavors:["original"], sizes:["440ml"], priceMap:{"440ml":16}, img:"cola.webp" },
       { id:13, name:"Tanqueray", category:"Spirits", flavors:["gin"], sizes:["750ml"], priceMap:{"750ml":350}, img:"tanqueray.webp" },
-      { id:16, name:"Amarula", category:"Spirits", flavors:["cream"], sizes:["Shot","750ml","Big Bottle"], priceMap:{"Shot":28,"750ml":115,"Big Bottle":190}, img:"amarula.webp" },
-      { id:31, name:"Gordons", category:"Spirits", flavors:["gin"], sizes:["750ml","1L"], priceMap:{"750ml":220,"1L":280}, img:"gordons.webp" },
-      { id:32, name:"Jameson", category:"Spirits", flavors:["whiskey"], sizes:["750ml","1L"], priceMap:{"750ml":320,"1L":420}, img:"jameson.png" },
-      { id:33, name:"Johnnie Walker Black", category:"Spirits", flavors:["whiskey"], sizes:["750ml"], priceMap:{"750ml":380}, img:"johnnie black.png" },
-      { id:34, name:"Johnnie Walker Red", category:"Spirits", flavors:["whiskey"], sizes:["750ml"], priceMap:{"750ml":280}, img:"johnnie red.webp" },
-      { id:35, name:"Hennessy VS", category:"Spirits", flavors:["cognac"], sizes:["750ml"], priceMap:{"750ml":550}, img:"hennessy.png" },
-      { id:36, name:"Smirnoff", category:"Spirits", flavors:["vodka"], sizes:["750ml"], priceMap:{"750ml":190}, img:"smirnoff.png" },
-      { id:37, name:"Absolut", category:"Spirits", flavors:["vodka"], sizes:["750ml"], priceMap:{"750ml":240}, img:"absolut.webp" },
-      // Shooters
-      { id:14, name:"Jägermeister", category:"Shooters", flavors:["herbal"], sizes:["shot","750ml"], priceMap:{"shot":30,"750ml":280}, img:"jägermeister.png" },
+      { id:14, name:"Jägermeister", category:"Shooters", flavors:["herbal"], sizes:["shot"], priceMap:{"shot":30}, img:"jägermeister.png" },
       { id:15, name:"Bug Shot", category:"Shooters", flavors:["original"], sizes:["Shot"], priceMap:{"Shot":16}, img:"bug.png" },
-      { id:38, name:"Strawberry Lips", category:"Shooters", flavors:["strawberry"], sizes:["Shot"], priceMap:{"Shot":18}, img:"strawberry lips.png" },
-      { id:39, name:"Tequila Rose", category:"Shooters", flavors:["strawberry"], sizes:["Shot","750ml"], priceMap:{"Shot":25,"750ml":220}, img:"tequila rose.png" },
-      { id:40, name:"Sour Apple", category:"Shooters", flavors:["apple"], sizes:["Shot"], priceMap:{"Shot":18}, img:"sour apple.png" },
-      { id:41, name:"Russian Bear", category:"Spirits", flavors:["vodka"], sizes:["750ml"], priceMap:{"750ml":160}, img:"russian bear.png" },
-      { id:42, name:"Viceroy", category:"Spirits", flavors:["brandy"], sizes:["750ml"], priceMap:{"750ml":150}, img:"viceroy.png" }
+      { id:16, name:"Amarula", category:"Spirits", flavors:["cream"], sizes:["Shot","Medium Bottle","Big Bottle"], priceMap:{"Shot":28,"Medium Bottle":115,"Big Bottle":190}, img:"amarula.webp" },
+      { id:17, name:"Extreme", category:"Ciders", flavors:["guarana"], sizes:["Can"], priceMap:{"Can":32}, img:"extreme.webp" },
+      { id:18, name:"Paal Perle", category:"Wine", flavors:["white"], sizes:["Big Bottle"], priceMap:{"Big Bottle":90}, img:"paal perle.webp" },
+      { id:19, name:"Sol", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":26}, img:"sol.webp" },
+      { id:20, name:"Belgravia", category:"Ciders", flavors:["gin & tonic","gin & dry lemon"], sizes:["Can"], priceMap:{"Can":28}, img:"belgravia can.webp" },
+      { id:21, name:"Bosvark", category:"Spirits", flavors:["whiskey"], sizes:["100ml"], priceMap:{"100ml":20}, img:"bosvark.webp" },
+      { id:22, name:"Klipdrift", category:"Spirits", flavors:["brandy"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":80}, img:"klipdrift.webp" },
+      { id:23, name:"1818", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"1818.webp" },
+      { id:24, name:"Russian Bear", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":64}, img:"Russian beer.webp" },
+      { id:25, name:"Belgravi Gin", category:"Spirits", flavors:["gin"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"belgravia gin.webp" },
+      { id:26, name:"Mainstay", category:"ciders", flavors:["passion","mojito"], sizes:["Bottle"], priceMap:{"Bottle":65}, img:"mainstay.webp" },
+      { id:27, name:"B&T", category:"Spirits", flavors:["vodka & jellybabies"], sizes:["Bottle"], priceMap:{"Bottle":55}, img:"b&t.webp" },
+      { id:28, name:"Black Crown", category:"Ciders", flavors:["apple"], sizes:["Can"], priceMap:{"Can":25}, img:"black crown.webp" },
+      { id:29, name:"Chillas Punch", category:"Ciders", flavors:["mango","sunrise"], sizes:["Can"], priceMap:{"Can":26}, img:"chillas punch.webp" },
+      { id:30, name:"Corona", category:"Beer", flavors:["lager"], sizes:["Big Bottle","Small Bottle"], priceMap:{"Big Bottle":32,"Small Bottle":22}, img:"corona.webp" },
+      { id:31, name:"Hennessy", category:"Spirits", flavors:["cognac"], sizes:["Big Bottle"], priceMap:{"Big Bottle":650}, img:"Hennessy.png" },
+      { id:32, name:"Windhoek", category:"Beer", flavors:["lager","draft"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":28,"Can":23}, img:"Windhoek.png" },
+      { id:33, name:"Chateau", category:"Sparkling Wine", flavors:["rose","red","white"], sizes:["Bottle"], priceMap:{"Bottle":22}, img:"chateu.webp" },
+      { id:34, name:"Reds MXD", category:"Ciders", flavors:["pine","vodka & guarana"], sizes:["Bottle","Can"], priceMap:{"Bottle":32,"Can":28}, img:"reds mxd.webp" },
+      { id:35, name:"Latos", category:"Beer", flavors:["lager"], sizes:["Big Bottle"], priceMap:{"Big Bottle":45}, img:"latos.webp" },
+      { id:36, name:"Bernini", category:"Sparkling Wine", flavors:["blush","classic","ember","mimosa"], sizes:["Can"], priceMap:{"Can":23}, img:"bernini.webp" },
+      { id:37, name:"Flying Fish", category:"Beer", flavors:["lemon"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":27,"Can":22}, img:"flying fish.png" },
+      { id:38, name:"Castle", category:"Beer", flavors:["double malt","lite","milk stout","lager"], sizes:["Bottle","Can"], priceMap:{"Bottle":26,"Can":20}, img:"castle.webp" },
+      { id:39, name:"Stella Artois", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":25}, img:"stella.png" },
+      { id:40, name:"Avhashoni", category:"Spirits", flavors:["vodka"], sizes:["1L"], priceMap:{"1L":120}, img:"avhashoni.webp" },
+      { id:41, name:"Hansa", category:"Beer", flavors:["lager"], sizes:["Can","Big Bottle"], priceMap:{"Can":22,"Big Bottle":26}, img:"hansa.webp" },
+      { id:42, name:"Bahama Punch", category:"Ciders", flavors:["watermelon"], sizes:["Can"], priceMap:{"Can":28}, img:"Bahama puch.png" }
     ];
 
     // ========== GLOBAL STATE ==========
@@ -749,7 +742,6 @@
     }
     
     function showToast(message) {
-      // Simple console log - you can enhance with a real toast
       console.log('✓', message);
     }
     
@@ -870,26 +862,17 @@
     
     // ========== INITIALIZATION ==========
     function init() {
-      // Load cart from storage
       loadCartFromStorage();
-      
-      // Render products
       renderProducts();
-      
-      // Init filters
       initCategoryFilters();
-      
-      // Render events
       renderUpcomingEvents();
       
-      // Map
       const map = L.map('map').setView([-22.978815, 30.433430], 16);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
       L.marker([-22.978815, 30.433430]).addTo(map).bindPopup('<b>VILLAGE BEV</b><br>Premium Liquor').openPopup();
       
-      // Event listeners
       document.getElementById("menuButton")?.addEventListener("click", () => { 
         document.getElementById("sidebarMenu")?.classList.add("open"); 
         document.getElementById("overlay")?.classList.add("active"); 
@@ -925,13 +908,11 @@
         document.getElementById("newEventDate").value = "";
       });
       
-      // Hide loader
       setTimeout(() => {
         document.getElementById('globalLoader')?.classList.add('hidden');
       }, 1000);
     }
     
-    // Start everything
     init();
   })();
 </script>
