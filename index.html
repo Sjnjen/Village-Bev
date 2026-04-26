@@ -110,7 +110,6 @@
     footer { background: #000; color: #ccc; padding: 40px 20px; text-align: center; }
     @media (max-width: 768px) { .hero-content h1 { font-size: 2rem; } .section-container { padding: 50px 20px; } .delivery-name-row { flex-direction: column; } }
     .error-msg { color: #ff4444; font-size: 0.8rem; margin-top: -8px; margin-bottom: 8px; display: none; }
-    .new-badge { background: #d4af37; color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 30px; display: inline-block; margin-left: 8px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.5px; }
   </style>
 </head>
 <body>
@@ -125,7 +124,7 @@
 <main class="main-content" id="mainContent"><header><div class="navbar"><div class="logo-circle" id="logoHome"><div class="logo-circle-img" id="headerLogoImg"><img id="headerLogoIcon" src="logo1.png" alt="VB" onerror="this.onerror=null; this.src='https://placehold.co/55x55/000000/white?text=VB';"></div><div class="logo-text">VILLAGE BEV<span>Venda's #1 choice</span></div></div><div style="display: flex; align-items: center;"><div class="cart-icon-container" id="cartIconTop"><i class="fas fa-shopping-cart fa-xl"></i><span class="cart-badge" id="cartCountBadge">0</span></div><button class="menu-btn" id="menuButton"><i class="fas fa-bars"></i> MENU</button></div></div></header>
 <div class="overlay" id="overlay"></div><div class="sidebar-menu" id="sidebarMenu"><div class="close-menu" id="closeMenu">&times;</div><a onclick="scrollToSection('drinks-section'); closeSidebar();"><i class="fas fa-wine-bottle"></i> Drinks</a><a onclick="scrollToSection('party-section'); closeSidebar();"><i class="fas fa-glass-cheers"></i> Party Zone</a><a onclick="scrollToSection('location-section'); closeSidebar();"><i class="fas fa-map-marker-alt"></i> Location</a><a onclick="scrollToSection('delivery-section'); closeSidebar();"><i class="fas fa-truck"></i> Delivery</a><a onclick="openCartOverlay(); closeSidebar();"><i class="fas fa-shopping-cart"></i> Cart</a></div>
 
-<div id="drinks-section" class="section-container"><div class="section-title">🍾 Drinks Menu • Select flavor & size</div><div class="cat-filters" id="categoryFilters"><button class="cat-btn active" data-cat="all">All Drinks</button><button class="cat-btn" data-cat="Beer">Beer</button><button class="cat-btn" data-cat="Wine">Wine</button><button class="cat-btn" data-cat="Sparkling">Sparkling</button><button class="cat-btn" data-cat="Ciders">Ciders</button><button class="cat-btn" data-cat="Spirits">Spirits</button><button class="cat-btn" data-cat="Cold Drinks">Cold Drinks</button><button class="cat-btn" data-cat="Shooters">Shooters</button></div><div id="productsContainer" class="product-grid"></div></div>
+<div id="drinks-section" class="section-container"><div class="section-title">🍾 Drinks Menu • Select flavor & size</div><div class="cat-filters" id="categoryFilters"><button class="cat-btn active" data-cat="all">All Drinks</button><button class="cat-btn" data-cat="Beer">Beer</button><button class="cat-btn" data-cat="Wine">Wine</button><button class="cat-btn" data-cat="Sparkling Wine">Sparkling</button><button class="cat-btn" data-cat="Ciders">Ciders</button><button class="cat-btn" data-cat="Spirits">Spirits</button><button class="cat-btn" data-cat="Cold Drinks">Cold Drinks</button><button class="cat-btn" data-cat="Shooters">Shooters</button></div><div id="productsContainer" class="product-grid"></div></div>
 
 <div id="party-section" class="section-container"><div class="section-title">🎉 Party Zone • Events & Vibes</div><div class="events-showcase"><div class="featured-event"><h2>✨ FEATURED UPCOMING EVENT</h2><img id="featuredEventImg" class="event-img" src="https://placehold.co/800x400/111111/d4af37?text=Purple+Haze+Fest" alt="Event Photo" onclick="promptChangeFeatured()"><p id="featuredEventDesc"><strong>PURPLE HAZE FEST</strong> • 25 April 2025 • Live DJ</p><button onclick="promptChangeFeatured()" class="btn" style="background:#333;"><i class="fas fa-camera"></i> Change Event Photo & Details</button></div><div class="upcoming-events-list"><h3><i class="fas fa-calendar-alt"></i> Upcoming Events (Photo Gallery)</h3><div id="upcomingEventsContainer" class="events-list"></div><div class="add-event-controls"><input type="text" id="newEventImgUrl" placeholder="Image URL (photo link)" value="https://placehold.co/400x300/111111/d4af37?text=New+Event"><input type="text" id="newEventTitle" placeholder="Event name (e.g., Sunset Fiesta)"><input type="text" id="newEventDate" placeholder="Date & details"><button id="addEventBtn"><i class="fas fa-plus-circle"></i> Add Event</button></div><p style="font-size:0.75rem; margin-top:12px;">💡 Tip: Just paste any photo URL and event details → instantly shows upcoming event card!</p></div><h3>📸 Party Memories</h3><div class="photo-gallery-row"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+1"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+2"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+3"></div><h3>🎥 Video Memories</h3><div class="video-grid"><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4"></video><p>Cheers moment</p></div><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4"></video><p>DJ night</p></div></div></div></div>
 
@@ -138,44 +137,79 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
-  // ========== ENHANCED PRODUCT DATABASE WITH ALL UPDATES ==========
-  // 1. Added Avhashoni 750ml for R160 (distinct image)
-  // 2. Added Bernini 4 flavors exactly: Amber, Mimosa, Blush, Classic
-  // 3. Added Gordon's 200ml for R30 (NEW)
-  // 4. Added NEW item: 7590ml? But interpreted as distinct "Exclusive Reserve 750ml" for R210 with own image (customer requested: 7590ml for 210 new item)
-  // 5. Updated Jägermeister 750ml price to R380
-  // 6. Each new item has its own standalone image.
-  
-  // Distinct high-quality images for new items (URLs using unsplash / premium mockups)
-  const avhashoniImg = "https://images.unsplash.com/photo-1614313913007-2d4e8e9e7c9c?w=400&h=300&fit=crop";
-  const gordonsImg = "https://images.unsplash.com/photo-1614313513387-5c9a6f5ae1b8?w=400&h=300&fit=crop";
-  const exclusiveReserveImg = "https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=400&h=300&fit=crop";
-  const berniniBaseImg = "https://images.unsplash.com/photo-1595443698832-8a2e3f3b9dcc?w=400&h=300&fit=crop";
-  const jagermeisterUpdatedImg = "https://images.unsplash.com/photo-1614313913007-2d4e8e9e7c9c?w=400&h=300&fit=crop";
-  
-  const productsData = [
+  // ========== UPDATED PRODUCT DATABASE ==========
+  const baseProducts = [
     { id:1, name:"4th Street", category:"Wine", flavors:["sweet white","sweet red","sweet rose"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":150}, img:"4th street.png" },
+    { id:2, name:"Drostdy Hof", category:"Wine", flavors:["classic"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":162}, img:"drostdy hof.webp" },
     { id:3, name:"Black Label", category:"Beer", flavors:["lager"], sizes:["500ml","750ml"], priceMap:{"500ml":22,"750ml":26}, img:"black label.webp" },
+    { id:4, name:"Heineken", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":30,"650ml":28}, img:"haineken.webp" },
+    { id:5, name:"Amstel", category:"Beer", flavors:["lager"], sizes:["500ml","650ml"], priceMap:{"500ml":26,"650ml":24}, img:"amstel.png" },
     { id:6, name:"Savanna", category:"Ciders", flavors:["dry","light"], sizes:["330ml","500ml","Can 500ml"], priceMap:{"330ml":25,"500ml":32,"Can 500ml":29}, img:"savana.png" },
-    { id:9, name:"JC Le Roux", category:"Sparkling", flavors:["brut"], sizes:["750ml"], priceMap:{"750ml":110}, img:"jc le Roux.webp" },
+    { id:7, name:"Hunters Dry", category:"Ciders", flavors:["dry"], sizes:["440ml","660ml"], priceMap:{"440ml":24,"660ml":30}, img:"hunters.png" },
+    { id:8, name:"Brutal Fruit", category:"Ciders", flavors:["strawberry","ruby","lichi"], sizes:["500ml"], priceMap:{"500ml":26}, img:"brutal fruit.webp" },
+    { id:9, name:"JC Le Roux", category:"Sparkling Wine", flavors:["brut"], sizes:["750ml"], priceMap:{"750ml":110}, img:"jc le Roux.webp" },
+    { id:10, name:"Red Bull", category:"Cold Drinks", flavors:["original"], sizes:["335ml"], priceMap:{"335ml":30}, img:"red bull.webp" },
+    { id:11, name:"Schweppes", category:"Cold Drinks", flavors:["dry lemon","tonic","lemonade"], sizes:["1L"], priceMap:{"1L":20}, img:"schweppers.webp" },
+    { id:12, name:"Coca Cola", category:"Cold Drinks", flavors:["original"], sizes:["440ml"], priceMap:{"440ml":16}, img:"cola.webp" },
     { id:13, name:"Tanqueray", category:"Spirits", flavors:["gin"], sizes:["750ml"], priceMap:{"750ml":350}, img:"tanqueray.webp" },
-    // Jägermeister UPDATED price 750ml to R380
-    { id:14, name:"Jägermeister", category:"Shooters", flavors:["herbal"], sizes:["shot","750ml"], priceMap:{"shot":30,"750ml":380}, img:jagermeisterUpdatedImg },
+    { id:14, name:"Jägermeister", category:"Shooters", flavors:["herbal"], sizes:["shot","750ml"], priceMap:{"shot":30,"750ml":380}, img:"jägermeister.png" },  // price updated to 380
+    { id:15, name:"Bug Shot", category:"Shooters", flavors:["original"], sizes:["Shot"], priceMap:{"Shot":16}, img:"bug.png" },
     { id:16, name:"Amarula", category:"Spirits", flavors:["cream"], sizes:["Shot","Medium Bottle","Big Bottle"], priceMap:{"Shot":28,"Medium Bottle":115,"Big Bottle":190}, img:"amarula.webp" },
-    // AVHASHONI with 750ml size at R160 (added new size)
-    { id:38, name:"Avhashoni", category:"Spirits", flavors:["vodka"], sizes:["100ml","200ml","750ml"], priceMap:{"100ml":20,"200ml":35,"750ml":160}, img:avhashoniImg },
-    // GORDON'S 200ml for R30 exactly
-    { id:41, name:"Gordon's", category:"Spirits", flavors:["premium gin"], sizes:["200ml"], priceMap:{"200ml":30}, img:gordonsImg },
-    // NEW EXCLUSIVE ITEM: "7590ml" request -> turned into "Exclusive Reserve 750ml" for R210 with own image
-    { id:42, name:"Exclusive Reserve", category:"Spirits", flavors:["limited edition"], sizes:["750ml"], priceMap:{"750ml":210}, img:exclusiveReserveImg, isSpecial: true },
-    // Bernini 4 distinct flavors as requested: Amber, Mimosa, Blush, Classic
-    { id:210, name:"Bernini Amber", category:"Sparkling", flavors:["amber"], sizes:["Can","Single"], priceMap:{"Can":23,"Single":23}, img:berniniBaseImg },
-    { id:211, name:"Bernini Mimosa", category:"Sparkling", flavors:["mimosa"], sizes:["Can","Single"], priceMap:{"Can":23,"Single":23}, img:berniniBaseImg },
-    { id:212, name:"Bernini Blush", category:"Sparkling", flavors:["blush"], sizes:["Can","Single"], priceMap:{"Can":23,"Single":23}, img:berniniBaseImg },
-    { id:213, name:"Bernini Classic", category:"Sparkling", flavors:["classic"], sizes:["Can","Single"], priceMap:{"Can":23,"Single":23}, img:berniniBaseImg },
+    { id:17, name:"Extreme", category:"Ciders", flavors:["guarana"], sizes:["Can"], priceMap:{"Can":32}, img:"extreme.webp" },
+    { id:18, name:"Paal Perle", category:"Wine", flavors:["white"], sizes:["Big Bottle"], priceMap:{"Big Bottle":90}, img:"paal perle.webp" },
+    { id:19, name:"Sol", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":26}, img:"sol.webp" },
+    { id:20, name:"Belgravia", category:"Ciders", flavors:["gin & tonic","gin & dry lemon"], sizes:["Can"], priceMap:{"Can":28}, img:"belgravia can.webp" },
+    { id:21, name:"Bosvark", category:"Spirits", flavors:["whiskey"], sizes:["100ml"], priceMap:{"100ml":20}, img:"bosvark.png" },
+    { id:22, name:"Klipdrift", category:"Spirits", flavors:["brandy"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":80}, img:"klipdrift.webp" },
+    { id:23, name:"1818", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"1818.webp" },
+    { id:24, name:"Russian Bear", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":64}, img:"Russian beer.webp" },
+    { id:25, name:"Belgravi Gin", category:"Spirits", flavors:["gin"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"belgravia gin.webp" },
+    { id:26, name:"Mainstay", category:"Ciders", flavors:["passion","mojito"], sizes:["330ml"], priceMap:{"330ml":25}, img:"mainstay.webp" },
+    { id:27, name:"B&T", category:"Spirits", flavors:["vodka & jellybabies"], sizes:["330ml"], priceMap:{"330ml":55}, img:"b&t.webp" },
+    { id:28, name:"Black Crown", category:"Ciders", flavors:["gin and tonic"], sizes:["Can"], priceMap:{"Can":25}, img:"black crown.webp" },
+    { id:29, name:"Chillas Punch", category:"Ciders", flavors:["mango","sunrise","ice"], sizes:["Can"], priceMap:{"Can":26}, img:"chillas punch.webp" },
     { id:30, name:"Corona", category:"Beer", flavors:["lager"], sizes:["330ml","410ml"], priceMap:{"330ml":22,"410ml":32}, img:"corona.webp" },
-    { id:32, name:"Windhoek", category:"Beer", flavors:["lager","draft"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":28,"Can":23}, img:"Windhoek.png" }
+    { id:31, name:"Hennessy", category:"Spirits", flavors:["cognac"], sizes:["Big Bottle"], priceMap:{"Big Bottle":650}, img:"Hennessy.png" },
+    { id:32, name:"Windhoek", category:"Beer", flavors:["lager","draft"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":28,"Can":23}, img:"Windhoek.png" },
+    { id:33, name:"Chateau", category:"Sparkling Wine", flavors:["rose","red","white"], sizes:["250ml"], priceMap:{"250ml":22}, img:"chateu.webp" },
+    { id:34, name:"Reds MXD", category:"Ciders", flavors:["pine","vodka & guarana"], sizes:["Bottle","Can"], priceMap:{"Bottle":32,"Can":28}, img:"reds mxd.webp" },
+    { id:35, name:"Latos", category:"Beer", flavors:["lager"], sizes:["Big Bottle"], priceMap:{"Big Bottle":45}, img:"latos.png" },
+    { id:36, name:"Flying Fish", category:"Beer", flavors:["lemon"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":27,"Can":22}, img:"flying fish.png" },
+    { id:37, name:"Stella Artois", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":25}, img:"stella.png" },
+    { id:38, name:"Avhashoni", category:"Spirits", flavors:["vodka"], sizes:["100ml","200ml","750ml"], priceMap:{"100ml":20,"200ml":35,"750ml":100}, img:"avhashoni.webp" },  // 750ml added (price placeholder)
+    { id:39, name:"Hansa", category:"Beer", flavors:["cort"], sizes:["Big Bottle"], priceMap:{"Big Bottle":26}, img:"hansa.webp" },
+    { id:40, name:"Bahama Punch", category:"Ciders", flavors:["watermelon","Pinacalada"], sizes:["Can"], priceMap:{"Can":28}, img:"Bahama puch.png" },
+    // New product: Godons
+    { id:41, name:"Godons", category:"Spirits", flavors:["gin"], sizes:["200ml","750ml"], priceMap:{"200ml":30,"750ml":210}, img:"godons.png" }
   ];
+  
+  // Expand Castle into separate items per flavor
+  const castleFlavors = ["double malt", "lite", "milk stout", "lager"];
+  const castleBase = { name:"Castle", category:"Beer", sizes:["Bottle","Can"], priceMap:{"Bottle":26,"Can":20}, img:"castle.webp" };
+  const castleItems = castleFlavors.map((flavor, idx) => ({
+    id: 100 + idx,
+    name: `Castle ${flavor.charAt(0).toUpperCase() + flavor.slice(1)}`,
+    category: "Beer",
+    flavors: [flavor],
+    sizes: castleBase.sizes,
+    priceMap: castleBase.priceMap,
+    img: castleBase.img
+  }));
+  
+  // Expand Bernini with updated flavors: amber, mimosa, blush, classic
+  const berniniFlavors = ["amber", "mimosa", "blush", "classic"];
+  const berniniBase = { name:"Bernini", category:"Sparkling Wine", sizes:["Can","Single"], priceMap:{"Can":23,"Single":23}, img:"bernini.webp" };
+  const berniniItems = berniniFlavors.map((flavor, idx) => ({
+    id: 200 + idx,
+    name: `Bernini ${flavor.charAt(0).toUpperCase() + flavor.slice(1)}`,
+    category: "Sparkling Wine",
+    flavors: [flavor],
+    sizes: berniniBase.sizes,
+    priceMap: berniniBase.priceMap,
+    img: berniniBase.img
+  }));
+  
+  const productsData = [...baseProducts, ...castleItems, ...berniniItems];
   
   let cart = [];
   let currentFilter = "all";
@@ -192,9 +226,7 @@
       const defaultPrice = getPrice(product, defaultSize);
       const placeholderImg = `https://placehold.co/400x300/1a1a1a/d4af37?text=${encodeURIComponent(product.name)}`;
       const showFlavorSelect = product.flavors.length > 1;
-      const isNewItem = (product.id === 41 || product.id === 42 || (product.id === 38 && product.sizes.includes("750ml")));
-      const newBadgeHtml = isNewItem ? '<span class="new-badge"><i class="fas fa-bolt"></i> NEW</span>' : '';
-      return `<div class="product-card" data-product-id="${product.id}"><div class="product-img"><img src="${product.img}" alt="${product.name}" onerror="this.onerror=null; this.src='${placeholderImg}';"></div><div class="product-cat">${product.category} ${newBadgeHtml}</div><div class="product-name">${product.name}</div>${showFlavorSelect ? `<select class="flavor-select" data-product-id="${product.id}">${product.flavors.map(f => `<option value="${f}">${f}</option>`).join('')}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}<select class="size-select" data-product-id="${product.id}">${product.sizes.map(s => { const price = getPrice(product, s); return `<option value="${s}" data-price="${price}">${s} - ${formatPrice(price)}</option>`; }).join('')}</select><div class="product-price" id="price-${product.id}">${formatPrice(defaultPrice)}</div><button class="btn add-to-cart-btn" data-product-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>`;
+      return `<div class="product-card" data-product-id="${product.id}"><div class="product-img"><img src="${product.img}" alt="${product.name}" onerror="this.onerror=null; this.src='${placeholderImg}';"></div><div class="product-cat">${product.category}</div><div class="product-name">${product.name}</div>${showFlavorSelect ? `<select class="flavor-select" data-product-id="${product.id}">${product.flavors.map(f => `<option value="${f}">${f}</option>`).join('')}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}<select class="size-select" data-product-id="${product.id}">${product.sizes.map(s => { const price = getPrice(product, s); return `<option value="${s}" data-price="${price}">${s} - ${formatPrice(price)}</option>`; }).join('')}</select><div class="product-price" id="price-${product.id}">${formatPrice(defaultPrice)}</div><button class="btn add-to-cart-btn" data-product-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>`;
     }).join('');
     document.querySelectorAll('.size-select').forEach(select => select.addEventListener('change', function(e) { const pid = parseInt(this.dataset.productId); const price = this.options[this.selectedIndex].dataset.price; const disp = document.getElementById(`price-${pid}`); if(disp) disp.textContent = formatPrice(parseFloat(price)); }));
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', function(e) { const pid = parseInt(this.dataset.productId); const card = this.closest('.product-card'); const product = productsData.find(p => p.id === pid); if(!product) return; const flavorSel = card.querySelector('.flavor-select'); const sizeSel = card.querySelector('.size-select'); const flavor = flavorSel ? flavorSel.value : product.flavors[0]; const size = sizeSel.value; const price = parseFloat(sizeSel.options[sizeSel.selectedIndex].dataset.price); addToCart(product, flavor, size, price); animateFlyToCart(this); }));
