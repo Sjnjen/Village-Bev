@@ -217,7 +217,7 @@
     { id:39, name:"Hansa", category:"Beer", flavors:["cort"], sizes:["Big Bottle"], priceMap:{"Big Bottle":24}, img:"hansa.webp" },
     { id:40, name:"Bahama Punch", category:"Ciders", flavors:["watermelon","Pinacalada"], sizes:["Can"], priceMap:{"Can":26}, img:"Bahama puch.png" },
     { id:41, name:"Gordon's", category:"Spirits", flavors:["gin"], sizes:["200ml","750ml"], priceMap:{"200ml":80,"750ml":210}, img:"gordons.webp" },
-    { id:42, name:"Atom Harvest", category:"Sparkling Wine", flavors:["crackling rose","crackling white","crackling red"], sizes:["750ml","1.5L"], priceMap:{"750ml":45,"1.5L":82}, img:"atom-harvest.png" },
+    { id:42, name:"Automn Harvest", category:"Sparkling Wine", flavors:["crackling rose","crackling white","crackling red"], sizes:["750ml","1.5L"], priceMap:{"750ml":45,"1.5L":82}, img:"atom.webp" },
     { id:43, name:"Vodka Sky Blue", category:"Spirits", flavors:["sky blue"], sizes:["750ml"], priceMap:{"750ml":270}, img:"skyblue.webp" }
   ];
   
@@ -225,12 +225,12 @@
     { flavor: "double malt", img: "doublemalt.webp", priceMap: {"Bottle":26,"Can":20} },
     { flavor: "milk stout", img: "milkstout.webp", priceMap: {"Bottle":28,"Can":22} },
     { flavor: "lager", img: "larger.webp", priceMap: {"Bottle":24,"Can":20} },
-    { flavor: "lite", img: "castle_lite_fallback.png", priceMap: {"Bottle":27,"Can":22} }
+    { flavor: "lite", img: "castle.webp", priceMap: {"Bottle":27,"Can":22} }
   ];
   const castleItems = castleFlavorsMap.map((item, idx) => ({ id: 100 + idx, name: `Castle ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`, category: "Beer", flavors: [item.flavor], sizes: ["Bottle","Can"], priceMap: item.priceMap, img: item.img }));
   const berniniFlavorsMap = [
     { flavor: "amber", img: "ember.webp", priceVal: 25 }, { flavor: "mimosa", img: "mimosa.webp", priceVal: 25 },
-    { flavor: "blush", img: "bernini_blush_fallback.png", priceVal: 23 }, { flavor: "classic", img: "classic.png", priceVal: 23 }
+    { flavor: "blush", img: "bernini.webp", priceVal: 23 }, { flavor: "classic", img: "classic.png", priceVal: 23 }
   ];
   const berniniItems = berniniFlavorsMap.map((item, idx) => ({ id: 200 + idx, name: `Bernini ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`, category: "Sparkling Wine", flavors: [item.flavor], sizes: ["Can","Single"], priceMap: {"Can":item.priceVal,"Single":item.priceVal}, img: item.img }));
   const productsData = [...baseProducts, ...castleItems, ...berniniItems];
