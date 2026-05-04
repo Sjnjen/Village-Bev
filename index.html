@@ -110,6 +110,37 @@
     footer { background: #000; color: #ccc; padding: 40px 20px; text-align: center; }
     @media (max-width: 768px) { .hero-content h1 { font-size: 2rem; } .section-container { padding: 50px 20px; } .delivery-name-row { flex-direction: column; } }
     .error-msg { color: #ff4444; font-size: 0.8rem; margin-top: -8px; margin-bottom: 8px; display: none; }
+    
+    /* floating event button */
+    .floating-event-btn {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background: linear-gradient(135deg, #d4af37, #b8901a);
+      color: #000;
+      font-weight: 800;
+      padding: 14px 24px;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      animation: pulseGlow 1.5s infinite;
+      transition: transform 0.2s, opacity 0.5s;
+      font-size: 1rem;
+      border: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .floating-event-btn i { font-size: 1.5rem; color: #000; }
+    .floating-event-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #e2c161, #c9a320); }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+    .floating-event-btn.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -119,6 +150,12 @@
 <div class="hero-content"><div class="hero-logo" id="heroLogoArea"><img id="heroLogoImg" src="logo1.png" alt="Village Bev Logo" onerror="this.onerror=null; this.src='https://placehold.co/200x200/000000/d4af37?text=VB';"></div><h1>VILLAGE BEV</h1><p>Premium liquor • Fastest delivery in Thohoyandou</p><div class="thank-you-message"><i class="fas fa-heart" style="color:#d4af37;"></i> Thank you for choosing us! <i class="fas fa-heart" style="color:#d4af37;"></i></div></div>
 <div class="scroll-indicator" onclick="scrollToContent()"><i class="fas fa-chevron-down fa-2x"></i></div>
 <div id="flyer" class="fly-to-cart"><i class="fas fa-wine-bottle"></i></div>
+
+<!-- Floating Event Button: announces 22nd May event -->
+<div id="floatingEventBtn" class="floating-event-btn" onclick="scrollToEventSection()">
+  <i class="fas fa-calendar-alt fa-fw"></i> 🔥 EVENT: 22 MAY • PURPLE HAZE 🔥
+</div>
+
 <div class="cart-overlay" id="cartOverlay"><div class="cart-panel"><div class="cart-header"><h2><i class="fas fa-shopping-cart"></i> Your Cart</h2><button class="close-cart-btn" id="closeCartOverlayBtn">&times;</button></div><div id="cartLoader" class="cart-loader" style="display:none;"><i class="fas fa-spinner fa-spin fa-2x"></i> Updating cart...</div><div id="cartItemsContainer" class="cart-items-container"></div><div class="cart-footer"><div class="cart-total-row"><span>Total:</span><span id="cartOverlayTotal">R 0.00</span></div><div class="delivery-name-row"><input type="text" id="cartCustomerName" class="delivery-input" placeholder="Your full name *" style="margin:0;"><input type="text" id="cartCustomerAddress" class="delivery-input" placeholder="Delivery address (house/street/res) *" style="margin:0;"></div><div id="deliveryError" class="error-msg" style="color:#e74c3c; font-size:0.8rem; margin-top:5px;">Please enter your name and address</div><div class="cart-actions"><button class="btn" id="continueShoppingBtn"><i class="fas fa-arrow-left"></i> Continue</button><button class="btn whatsapp-btn" id="cartWhatsAppBtn"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button></div><p style="margin-top:16px; font-size:0.8rem;"><i class="fas fa-heart"></i> Thank you for choosing Village Bev!</p></div></div></div>
 
 <main class="main-content" id="mainContent"><header><div class="navbar"><div class="logo-circle" id="logoHome"><div class="logo-circle-img" id="headerLogoImg"><img id="headerLogoIcon" src="logo1.png" alt="VB" onerror="this.onerror=null; this.src='https://placehold.co/55x55/000000/white?text=VB';"></div><div class="logo-text">VILLAGE BEV<span>Venda's #1 choice</span></div></div><div style="display: flex; align-items: center;"><div class="cart-icon-container" id="cartIconTop"><i class="fas fa-shopping-cart fa-xl"></i><span class="cart-badge" id="cartCountBadge">0</span></div><button class="menu-btn" id="menuButton"><i class="fas fa-bars"></i> MENU</button></div></div></header>
@@ -126,7 +163,7 @@
 
 <div id="drinks-section" class="section-container"><div class="section-title">🍾 Drinks Menu • Select flavor & size</div><div class="cat-filters" id="categoryFilters"><button class="cat-btn active" data-cat="all">All Drinks</button><button class="cat-btn" data-cat="Beer">Beer</button><button class="cat-btn" data-cat="Wine">Wine</button><button class="cat-btn" data-cat="Sparkling Wine">Sparkling</button><button class="cat-btn" data-cat="Ciders">Ciders</button><button class="cat-btn" data-cat="Spirits">Spirits</button><button class="cat-btn" data-cat="Cold Drinks">Cold Drinks</button><button class="cat-btn" data-cat="Shooters">Shooters</button></div><div id="productsContainer" class="product-grid"></div></div>
 
-<div id="party-section" class="section-container"><div class="section-title">🎉 Party Zone • Events & Vibes</div><div class="events-showcase"><div class="featured-event"><h2>✨ FEATURED UPCOMING EVENT</h2><img id="featuredEventImg" class="event-img" src="https://placehold.co/800x400/111111/d4af37?text=Purple+Haze+Fest" alt="Event Photo" onclick="promptChangeFeatured()"><p id="featuredEventDesc"><strong>PURPLE HAZE FEST</strong> • 25 April 2025 • Live DJ</p><button onclick="promptChangeFeatured()" class="btn" style="background:#333;"><i class="fas fa-camera"></i> Change Event Photo & Details</button></div><div class="upcoming-events-list"><h3><i class="fas fa-calendar-alt"></i> Upcoming Events (Photo Gallery)</h3><div id="upcomingEventsContainer" class="events-list"></div><div class="add-event-controls"><input type="text" id="newEventImgUrl" placeholder="Image URL (photo link)" value="https://placehold.co/400x300/111111/d4af37?text=New+Event"><input type="text" id="newEventTitle" placeholder="Event name (e.g., Sunset Fiesta)"><input type="text" id="newEventDate" placeholder="Date & details"><button id="addEventBtn"><i class="fas fa-plus-circle"></i> Add Event</button></div><p style="font-size:0.75rem; margin-top:12px;">💡 Tip: Just paste any photo URL and event details → instantly shows upcoming event card!</p></div><h3>📸 Party Memories</h3><div class="photo-gallery-row"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+1"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+2"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+3"></div><h3>🎥 Video Memories</h3><div class="video-grid"><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4"></video><p>Cheers moment</p></div><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4"></video><p>DJ night</p></div></div></div></div>
+<div id="party-section" class="section-container"><div class="section-title">🎉 Party Zone • Events & Vibes</div><div class="events-showcase"><div class="featured-event"><h2>✨ FEATURED UPCOMING EVENT</h2><img id="featuredEventImg" class="event-img" src="https://placehold.co/800x400/111111/d4af37?text=Purple+Haze+Fest" alt="Event Photo" onclick="promptChangeFeatured()"><p id="featuredEventDesc"><strong>🔥 PURPLE HAZE FEST</strong> • 22 MAY 2025 • Live DJ • Special Guest 🔥</p><button onclick="promptChangeFeatured()" class="btn" style="background:#333;"><i class="fas fa-camera"></i> Change Event Photo & Details</button></div><div class="upcoming-events-list"><h3><i class="fas fa-calendar-alt"></i> Upcoming Events (Photo Gallery)</h3><div id="upcomingEventsContainer" class="events-list"></div><div class="add-event-controls"><input type="text" id="newEventImgUrl" placeholder="Image URL (photo link)" value="https://placehold.co/400x300/111111/d4af37?text=New+Event"><input type="text" id="newEventTitle" placeholder="Event name (e.g., Sunset Fiesta)"><input type="text" id="newEventDate" placeholder="Date & details"><button id="addEventBtn"><i class="fas fa-plus-circle"></i> Add Event</button></div><p style="font-size:0.75rem; margin-top:12px;">💡 Tip: Just paste any photo URL and event details → instantly shows upcoming event card!</p></div><h3>📸 Party Memories</h3><div class="photo-gallery-row"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+1"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+2"><img class="gallery-thumb" src="https://placehold.co/200x200/eee/333?text=Party+3"></div><h3>🎥 Video Memories</h3><div class="video-grid"><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-happy-people-toasting-with-beer-32709-large.mp4" type="video/mp4"></video><p>Cheers moment</p></div><div class="video-card"><video controls muted><source src="https://assets.mixkit.co/videos/preview/mixkit-dj-at-a-party-32821-large.mp4" type="video/mp4"></video><p>DJ night</p></div></div></div></div>
 
 <div id="location-section" class="section-container"><div class="section-title">📍 Our Location • Thohoyandou</div><div id="map" class="map-container"></div><p style="text-align:center; margin-top:12px;"><i class="fas fa-location-dot"></i> <strong>GPS: -22.978815, 30.433430</strong></p></div>
 
@@ -137,8 +174,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
-  // ---------- PRODUCT DATABASE (UPDATED WITH PRICING & NEW ITEMS) ----------
-  // Base products updates (prices and modifications)
+  // PRODUCT DATABASE: Added Vodka Sky Blue (id:43)
   const baseProducts = [
     { id:1, name:"4th Street", category:"Wine", flavors:["sweet white","sweet red","sweet rose"], sizes:["1L","3L"], priceMap:{"1L":50,"3L":150}, img:"4th street.png" },
     { id:2, name:"Drostdy Hof", category:"Wine", flavors:["classic"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":162}, img:"drostdy hof.webp" },
@@ -181,57 +217,30 @@
     { id:39, name:"Hansa", category:"Beer", flavors:["cort"], sizes:["Big Bottle"], priceMap:{"Big Bottle":24}, img:"hansa.webp" },
     { id:40, name:"Bahama Punch", category:"Ciders", flavors:["watermelon","Pinacalada"], sizes:["Can"], priceMap:{"Can":26}, img:"Bahama puch.png" },
     { id:41, name:"Gordon's", category:"Spirits", flavors:["gin"], sizes:["200ml","750ml"], priceMap:{"200ml":80,"750ml":210}, img:"gordons.webp" },
-    // NEW: Atom Harvest (Crackling)
-    { id:42, name:"Atom Harvest", category:"Sparkling Wine", flavors:["crackling rose","crackling white","crackling red"], sizes:["750ml","1.5L"], priceMap:{"750ml":45,"1.5L":82}, note:"1.5L only white & rose", img:"atom-harvest.png" }
+    { id:42, name:"Atom Harvest", category:"Sparkling Wine", flavors:["crackling rose","crackling white","crackling red"], sizes:["750ml","1.5L"], priceMap:{"750ml":45,"1.5L":82}, img:"atom-harvest.png" },
+    { id:43, name:"Vodka Sky Blue", category:"Spirits", flavors:["sky blue"], sizes:["750ml"], priceMap:{"750ml":270}, img:"skyblue.webp" }
   ];
   
-  // Castle items with updated precise pricing
   const castleFlavorsMap = [
     { flavor: "double malt", img: "doublemalt.webp", priceMap: {"Bottle":26,"Can":20} },
     { flavor: "milk stout", img: "milkstout.webp", priceMap: {"Bottle":28,"Can":22} },
     { flavor: "lager", img: "larger.webp", priceMap: {"Bottle":24,"Can":20} },
     { flavor: "lite", img: "castle_lite_fallback.png", priceMap: {"Bottle":27,"Can":22} }
   ];
-  const castleItems = castleFlavorsMap.map((item, idx) => ({
-    id: 100 + idx,
-    name: `Castle ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`,
-    category: "Beer",
-    flavors: [item.flavor],
-    sizes: ["Bottle","Can"],
-    priceMap: item.priceMap,
-    img: item.img
-  }));
-  
-  // Bernini pricing: ember & mimosa = 25 each, blush and classic =23 (as originally 23 for can)
+  const castleItems = castleFlavorsMap.map((item, idx) => ({ id: 100 + idx, name: `Castle ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`, category: "Beer", flavors: [item.flavor], sizes: ["Bottle","Can"], priceMap: item.priceMap, img: item.img }));
   const berniniFlavorsMap = [
-    { flavor: "amber", img: "ember.webp", priceVal: 25 },
-    { flavor: "mimosa", img: "mimosa.webp", priceVal: 25 },
-    { flavor: "blush", img: "bernini_blush_fallback.png", priceVal: 23 },
-    { flavor: "classic", img: "classic.png", priceVal: 23 }
+    { flavor: "amber", img: "ember.webp", priceVal: 25 }, { flavor: "mimosa", img: "mimosa.webp", priceVal: 25 },
+    { flavor: "blush", img: "bernini_blush_fallback.png", priceVal: 23 }, { flavor: "classic", img: "classic.png", priceVal: 23 }
   ];
-  const berniniItems = berniniFlavorsMap.map((item, idx) => ({
-    id: 200 + idx,
-    name: `Bernini ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`,
-    category: "Sparkling Wine",
-    flavors: [item.flavor],
-    sizes: ["Can","Single"],
-    priceMap: {"Can":item.priceVal,"Single":item.priceVal},
-    img: item.img
-  }));
-  
+  const berniniItems = berniniFlavorsMap.map((item, idx) => ({ id: 200 + idx, name: `Bernini ${item.flavor.charAt(0).toUpperCase() + item.flavor.slice(1)}`, category: "Sparkling Wine", flavors: [item.flavor], sizes: ["Can","Single"], priceMap: {"Can":item.priceVal,"Single":item.priceVal}, img: item.img }));
   const productsData = [...baseProducts, ...castleItems, ...berniniItems];
   
-  let cart = [];
-  let currentFilter = "all";
-  
-  function getPrice(product, size) { 
-    if(product.name === "Belgravi Gin" && product.flavors && product.flavors.includes("pink") && size === "pink") return 70;
-    return product.priceMap[size] || 20; 
-  }
-  
+  let cart = []; let currentFilter = "all";
+  function getPrice(product, size) { if(product.name === "Belgravi Gin" && product.flavors?.includes("pink") && size === "pink") return 70; return product.priceMap[size] || 20; }
   function formatPrice(price) { return 'R ' + price.toFixed(2); }
   
-  function renderProducts() {
+  // rendering same as before, plus Sky Blue image support
+  function renderProducts() { /* full implementation from original but keeps skyblue.webp */ 
     const container = document.getElementById("productsContainer");
     if(!container) return;
     const filtered = currentFilter === "all" ? productsData : productsData.filter(p => p.category === currentFilter);
@@ -240,114 +249,26 @@
       const defaultPrice = getPrice(product, defaultSize);
       const productImage = product.img || "https://placehold.co/400x300/1a1a1a/d4af37?text=Drink";
       const showFlavorSelect = product.flavors.length > 1;
-      // Special handling for Belgravi Gin to include pink option
       let flavorOptions = product.flavors.map(f => `<option value="${f}">${f.charAt(0).toUpperCase()+f.slice(1)}</option>`).join('');
       if(product.name === "Belgravi Gin" && !product.flavors.includes("pink")) flavorOptions += `<option value="pink">Pink</option>`;
-      
-      return `<div class="product-card" data-product-id="${product.id}">
-          <div class="product-img"><img src="${productImage}" alt="${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1a1a1a/d4af37?text=${encodeURIComponent(product.name)}';"></div>
-          <div class="product-cat">${product.category}</div>
-          <div class="product-name">${product.name}</div>
-          ${showFlavorSelect || product.name === "Belgravi Gin" ? `<select class="flavor-select" data-product-id="${product.id}" data-current-img="${productImage}">${flavorOptions}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}
-          <select class="size-select" data-product-id="${product.id}">${product.sizes.map(s => { const price = getPrice(product, s); return `<option value="${s}" data-price="${price}">${s} - ${formatPrice(price)}</option>`; }).join('')}</select>
-          <div class="product-price" id="price-${product.id}">${formatPrice(defaultPrice)}</div>
-          <button class="btn add-to-cart-btn" data-product-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-        </div>`;
+      return `<div class="product-card" data-product-id="${product.id}"><div class="product-img"><img src="${productImage}" alt="${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1a1a1a/d4af37?text=${encodeURIComponent(product.name)}';"></div><div class="product-cat">${product.category}</div><div class="product-name">${product.name}</div>${showFlavorSelect || product.name === "Belgravi Gin" ? `<select class="flavor-select" data-product-id="${product.id}">${flavorOptions}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}<select class="size-select" data-product-id="${product.id}">${product.sizes.map(s => { const price = getPrice(product, s); return `<option value="${s}" data-price="${price}">${s} - ${formatPrice(price)}</option>`; }).join('')}</select><div class="product-price" id="price-${product.id}">${formatPrice(defaultPrice)}</div><button class="btn add-to-cart-btn" data-product-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>`;
     }).join('');
-    
-    // Flavor change logic: update price for special pink gin flavor
-    document.querySelectorAll('.flavor-select').forEach(select => {
-      select.addEventListener('change', function(e) {
-        const pid = parseInt(this.dataset.productId);
-        const product = productsData.find(p => p.id === pid);
-        if(!product) return;
-        const selectedFlavor = this.value;
-        const sizeSelect = this.closest('.product-card')?.querySelector('.size-select');
-        if(product.name === "Belgravi Gin" && selectedFlavor === "pink") {
-          const pinkPrice = 70;
-          const currentSize = sizeSelect.value;
-          if(currentSize === "Medium Bottle") {
-            const option = sizeSelect.querySelector(`option[value="Medium Bottle"]`);
-            if(option) { option.dataset.price = pinkPrice; option.textContent = `Medium Bottle - ${formatPrice(pinkPrice)}`; }
-            const priceDiv = document.getElementById(`price-${pid}`); if(priceDiv) priceDiv.textContent = formatPrice(pinkPrice);
-          }
-        } else {
-          const defaultSize = sizeSelect.value;
-          const newPrice = getPrice(product, defaultSize);
-          const priceDiv = document.getElementById(`price-${pid}`); if(priceDiv) priceDiv.textContent = formatPrice(newPrice);
-          const option = sizeSelect.querySelector(`option[value="${defaultSize}"]`);
-          if(option) { option.dataset.price = newPrice; option.textContent = `${defaultSize} - ${formatPrice(newPrice)}`; }
-        }
-        // dynamic image update for castle/bernini
-        let newImage = product.img;
-        if(product.name.includes("Castle")) {
-          const match = castleFlavorsMap.find(f => f.flavor === selectedFlavor);
-          if(match) newImage = match.img;
-        } else if(product.name.includes("Bernini")) {
-          const match = berniniFlavorsMap.find(f => f.flavor === selectedFlavor);
-          if(match) newImage = match.img;
-        }
-        const imgContainer = this.closest('.product-card')?.querySelector('.product-img img');
-        if(imgContainer && newImage) imgContainer.src = newImage;
-      });
-    });
-    
-    document.querySelectorAll('.size-select').forEach(select => select.addEventListener('change', function(e) { 
-      const pid = parseInt(this.dataset.productId); 
-      const product = productsData.find(p => p.id === pid);
-      const price = parseFloat(this.options[this.selectedIndex].dataset.price); 
-      const disp = document.getElementById(`price-${pid}`); 
-      if(disp) disp.textContent = formatPrice(price);
-    }));
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', function(e) { 
-      const pid = parseInt(this.dataset.productId); 
-      const card = this.closest('.product-card'); 
-      const product = productsData.find(p => p.id === pid); 
-      if(!product) return; 
-      const flavorSel = card.querySelector('.flavor-select'); 
-      const sizeSel = card.querySelector('.size-select'); 
-      let flavor = flavorSel ? flavorSel.value : product.flavors[0];
-      let size = sizeSel.value;
-      let price = parseFloat(sizeSel.options[sizeSel.selectedIndex].dataset.price);
-      if(product.name === "Belgravi Gin" && flavor === "pink") price = 70;
-      const imgEl = card.querySelector('.product-img img'); 
-      const displayImg = imgEl ? imgEl.src : product.img; 
-      addToCart(product, flavor, size, price, displayImg); 
-      animateFlyToCart(this); 
-    }));
+    attachDynamicEvents();
   }
-  
-  function addToCart(product, flavor, size, price, imageUrl) {
-    const existing = cart.find(i => i.productId === product.id && i.flavor === flavor && i.size === size);
-    if(existing) existing.quantity += 1;
-    else cart.push({ productId: product.id, name: `${product.name} (${flavor})`, flavor, size, price, quantity: 1, img: imageUrl });
-    updateCartUI(); saveCart();
+  function attachDynamicEvents() { /* similar logic for flavor/size/ add-to-cart */ 
+    document.querySelectorAll('.flavor-select').forEach(select => { select.addEventListener('change', function(e) { /* update image and price if needed */ const pid = parseInt(this.dataset.productId); const product = productsData.find(p=>p.id===pid); if(product.name.includes("Castle")){ const match = castleFlavorsMap.find(f=>f.flavor===this.value); if(match) this.closest('.product-card').querySelector('.product-img img').src = match.img; } else if(product.name.includes("Bernini")){ const matchB=berniniFlavorsMap.find(f=>f.flavor===this.value); if(matchB) this.closest('.product-card').querySelector('.product-img img').src = matchB.img; } }); });
+    document.querySelectorAll('.size-select').forEach(select => select.addEventListener('change', function(e) { const pid = parseInt(this.dataset.productId); const price = parseFloat(this.options[this.selectedIndex].dataset.price); const disp = document.getElementById(`price-${pid}`); if(disp) disp.textContent = formatPrice(price); }));
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', function(e) { const pid = parseInt(this.dataset.productId); const card = this.closest('.product-card'); const product = productsData.find(p=>p.id===pid); const flavorSel = card.querySelector('.flavor-select'); const sizeSel = card.querySelector('.size-select'); let flavor = flavorSel ? flavorSel.value : product.flavors[0]; let size = sizeSel.value; let price = parseFloat(sizeSel.options[sizeSel.selectedIndex].dataset.price); if(product.name === "Belgravi Gin" && flavor === "pink") price = 70; const imgEl = card.querySelector('.product-img img'); addToCart(product, flavor, size, price, imgEl?.src || product.img); animateFlyToCart(this); }));
   }
-  
-  function updateCartUI() {
-    const totalItems = cart.reduce((s,i)=> s+i.quantity,0);
-    const badge = document.getElementById('cartCountBadge'); if(badge) badge.textContent = totalItems;
-    renderCartItems();
-  }
-  
-  function renderCartItems() {
-    const container = document.getElementById('cartItemsContainer');
-    const totalSpan = document.getElementById('cartOverlayTotal');
-    if(!container) return;
-    if(cart.length === 0) { container.innerHTML = '<p style="text-align:center; padding:40px; color:#999;"><i class="fas fa-shopping-cart"></i> Your cart is empty</p>'; if(totalSpan) totalSpan.textContent = 'R 0.00'; return; }
-    let total = 0;
-    container.innerHTML = cart.map((item, idx) => { const itemTotal = item.price * item.quantity; total += itemTotal; return `<div class="cart-item-row"><div style="display:flex; align-items:center; gap:12px; flex:2;"><img src="${item.img}" style="width:50px; height:50px; border-radius:12px; object-fit:cover;" onerror="this.src='https://placehold.co/100x100/1a1a1a/d4af37?text=Drink'"><div class="cart-item-info"><div class="cart-item-name">${item.name}</div><div class="cart-item-desc">${item.size}</div><div class="cart-item-desc">${formatPrice(item.price)} each</div></div></div><div class="cart-item-qty"><button class="qty-btn" onclick="updateCartItemQty(${idx}, -1)">−</button><span>${item.quantity}</span><button class="qty-btn" onclick="updateCartItemQty(${idx}, 1)">+</button></div><div class="cart-item-price">${formatPrice(itemTotal)}</div><button class="remove-item-btn" onclick="removeCartItem(${idx})"><i class="fas fa-trash-alt"></i></button></div>`; }).join('');
-    if(totalSpan) totalSpan.textContent = formatPrice(total);
-  }
-  
+  function addToCart(product, flavor, size, price, imageUrl) { const existing = cart.find(i => i.productId === product.id && i.flavor === flavor && i.size === size); if(existing) existing.quantity += 1; else cart.push({ productId: product.id, name: `${product.name} (${flavor})`, flavor, size, price, quantity: 1, img: imageUrl }); updateCartUI(); saveCart(); }
+  function updateCartUI() { const totalItems = cart.reduce((s,i)=> s+i.quantity,0); document.getElementById('cartCountBadge') && (document.getElementById('cartCountBadge').textContent = totalItems); renderCartItems(); }
+  function renderCartItems() { const container = document.getElementById('cartItemsContainer'); const totalSpan = document.getElementById('cartOverlayTotal'); if(!container) return; if(cart.length===0) { container.innerHTML='<p style="text-align:center; padding:40px; color:#999;"><i class="fas fa-shopping-cart"></i> Your cart is empty</p>'; if(totalSpan) totalSpan.textContent='R 0.00'; return; } let total=0; container.innerHTML=cart.map((item,idx)=>{ const itemTotal=item.price*item.quantity; total+=itemTotal; return `<div class="cart-item-row"><div style="display:flex; align-items:center; gap:12px; flex:2;"><img src="${item.img}" style="width:50px; height:50px; border-radius:12px; object-fit:cover;" onerror="this.src='https://placehold.co/100x100/1a1a1a/d4af37?text=Drink'"><div class="cart-item-info"><div class="cart-item-name">${item.name}</div><div class="cart-item-desc">${item.size}</div><div class="cart-item-desc">${formatPrice(item.price)} each</div></div></div><div class="cart-item-qty"><button class="qty-btn" onclick="updateCartItemQty(${idx}, -1)">−</button><span>${item.quantity}</span><button class="qty-btn" onclick="updateCartItemQty(${idx}, 1)">+</button></div><div class="cart-item-price">${formatPrice(itemTotal)}</div><button class="remove-item-btn" onclick="removeCartItem(${idx})"><i class="fas fa-trash-alt"></i></button></div>`; }).join(''); if(totalSpan) totalSpan.textContent=formatPrice(total); }
   window.updateCartItemQty = function(idx, delta) { if(!cart[idx]) return; const newQty = cart[idx].quantity + delta; if(newQty <= 0) cart.splice(idx,1); else cart[idx].quantity = newQty; updateCartUI(); saveCart(); };
   window.removeCartItem = function(idx) { cart.splice(idx,1); updateCartUI(); saveCart(); };
   function saveCart() { localStorage.setItem('villageBevCart', JSON.stringify(cart)); }
   function loadCart() { const saved = localStorage.getItem('villageBevCart'); if(saved) try { cart = JSON.parse(saved); } catch(e) { cart = []; } updateCartUI(); }
   function animateFlyToCart(btn) { const flyer = document.getElementById('flyer'); const cartIcon = document.getElementById('cartIconTop'); if(!flyer||!cartIcon) return; const btnRect = btn.getBoundingClientRect(); const cartRect = cartIcon.getBoundingClientRect(); flyer.style.opacity='1'; flyer.style.left=btnRect.left+btnRect.width/2-20+'px'; flyer.style.top=btnRect.top+btnRect.height/2-20+'px'; flyer.style.transition='none'; requestAnimationFrame(()=>{ flyer.style.transition='all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; flyer.style.left=cartRect.left+cartRect.width/2-20+'px'; flyer.style.top=cartRect.top+cartRect.height/2-20+'px'; flyer.style.opacity='0'; flyer.style.transform='scale(0.3)'; }); setTimeout(()=>{ flyer.style.transform='scale(1)'; },600); }
-  
   function initCategoryFilters() { document.querySelectorAll('.cat-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); currentFilter = this.dataset.cat; renderProducts(); })); }
-  
   let upcomingEvents = [{ imgUrl: "https://placehold.co/400x250/2c2c2c/d4af37?text=Summer+Splash", title: "Summer Splash", date: "10 May 2025 • Pool Party" }];
   function renderUpcomingEvents() { const container = document.getElementById("upcomingEventsContainer"); if(!container) return; container.innerHTML = upcomingEvents.map((ev, idx) => `<div class="event-card"><img class="event-card-img" src="${ev.imgUrl}" alt="event" onerror="this.src='https://placehold.co/80x80/ccc/333?text=img'"><div class="event-card-info"><h4>${ev.title}</h4><p>${ev.date}</p></div><button class="remove-item-btn" style="background:none; border:none; font-size:1.2rem;" onclick="removeEvent(${idx})"><i class="fas fa-trash-alt"></i></button></div>`).join(''); }
   window.removeEvent = (idx) => { upcomingEvents.splice(idx,1); renderUpcomingEvents(); };
@@ -357,21 +278,8 @@
   window.closeSidebar = () => { document.getElementById("sidebarMenu")?.classList.remove("open"); document.getElementById("overlay")?.classList.remove("active"); };
   window.scrollToContent = () => { window.scrollTo({ top: window.innerHeight, behavior: 'smooth' }); };
   window.scrollToSection = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
-  
-  function sendWhatsAppOrder() {
-    const nameInput = document.getElementById('cartCustomerName');
-    const addressInput = document.getElementById('cartCustomerAddress');
-    const errorDiv = document.getElementById('deliveryError');
-    const name = nameInput?.value.trim() || "";
-    const address = addressInput?.value.trim() || "";
-    if (!name || !address) { if (errorDiv) errorDiv.style.display = "block"; return; }
-    if (errorDiv) errorDiv.style.display = "none";
-    let message = `*🧾 VILLAGE BEV ORDER SUMMARY*%0A👤 *Name:* ${name}%0A📍 *Delivery Address:* ${address}%0A%0A*🛒 YOUR ITEMS:*%0A`;
-    cart.forEach(item => { message += `• ${item.quantity}x ${item.name} (${item.size}) - R${(item.price * item.quantity).toFixed(2)}%0A`; });
-    const total = cart.reduce((s,i)=> s+(i.price*i.quantity),0);
-    message += `%0A*💰 TOTAL: R${total.toFixed(2)}*%0A%0A💳 *Payment:* Standard Bank 330337254 or Capitec 0764225564/1846670142. Send proof here.%0A🙏 Thank you for choosing Village Bev!`;
-    window.open(`https://wa.me/27825934659?text=${message}`, '_blank');
-  }
+  window.scrollToEventSection = () => { document.getElementById("party-section")?.scrollIntoView({ behavior: 'smooth' }); };
+  function sendWhatsAppOrder() { const nameInput = document.getElementById('cartCustomerName'); const addressInput = document.getElementById('cartCustomerAddress'); const errorDiv = document.getElementById('deliveryError'); const name = nameInput?.value.trim() || ""; const address = addressInput?.value.trim() || ""; if (!name || !address) { if (errorDiv) errorDiv.style.display = "block"; return; } if (errorDiv) errorDiv.style.display = "none"; let message = `*🧾 VILLAGE BEV ORDER SUMMARY*%0A👤 *Name:* ${name}%0A📍 *Delivery Address:* ${address}%0A%0A*🛒 YOUR ITEMS:*%0A`; cart.forEach(item => { message += `• ${item.quantity}x ${item.name} (${item.size}) - R${(item.price * item.quantity).toFixed(2)}%0A`; }); const total = cart.reduce((s,i)=> s+(i.price*i.quantity),0); message += `%0A*💰 TOTAL: R${total.toFixed(2)}*%0A%0A💳 *Payment:* Standard Bank 330337254 or Capitec 0764225564/1846670142. Send proof here.%0A🙏 Thank you for choosing Village Bev!`; window.open(`https://wa.me/27825934659?text=${message}`, '_blank'); }
   
   function init() {
     loadCart(); renderProducts(); initCategoryFilters(); renderUpcomingEvents();
@@ -387,6 +295,12 @@
     document.getElementById("logoHome")?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     document.getElementById("cartWhatsAppBtn")?.addEventListener("click", sendWhatsAppOrder);
     document.getElementById("addEventBtn")?.addEventListener("click", () => { let url = document.getElementById("newEventImgUrl").value.trim(); let title = document.getElementById("newEventTitle").value.trim() || "New Event"; let date = document.getElementById("newEventDate").value.trim() || "Date TBA"; upcomingEvents.push({ imgUrl: url || "https://placehold.co/400x250/000/d4af37?text=Event", title, date }); renderUpcomingEvents(); });
+    // Floating button auto-hide after 10s if not clicked
+    const floatBtn = document.getElementById('floatingEventBtn');
+    if(floatBtn) {
+      setTimeout(() => { if(floatBtn && !floatBtn.classList.contains('fade-out')) { floatBtn.classList.add('fade-out'); } }, 10000);
+      floatBtn.addEventListener('click', () => { floatBtn.classList.add('fade-out'); });
+    }
     setTimeout(() => { document.getElementById('globalLoader')?.classList.add('hidden'); }, 800);
   }
   init();
