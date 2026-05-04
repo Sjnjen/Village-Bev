@@ -137,30 +137,8 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
-  // ========== IMAGE MAPPING: Each flavor variant gets its unique label ==========
-  // Mapping special images exactly as per provided files: doublemalt.webp, milkstout.webp, larger.webp, ember.webp, mimosa.webp, classic.png
-  const flavorImageMap = {
-    "Castle Double Malt": "doublemalt.webp",
-    "Castle Milk Stout": "milkstout.webp",
-    "Castle Lager": "larger.webp",      // 'larger.webp' as given (matching lager variant)
-    "Castle Lite": "castle_lite_fallback.png", // fallback, but we keep castle generic
-    "Bernini Amber": "ember.webp",
-    "Bernini Mimosa": "mimosa.webp",
-    "Bernini Blush": "blush_fallback.png", // no specific file, but we still map gracefully
-    "Bernini Classic": "classic.png"
-  };
-  
-  // General fallback for castle/bernini base types
-  function getProductImage(productName, flavorText) {
-    const fullKey = `${productName} ${flavorText.charAt(0).toUpperCase() + flavorText.slice(1)}`;
-    if(flavorImageMap[fullKey]) return flavorImageMap[fullKey];
-    // fallback to product-specific images
-    if(productName.includes("Castle")) return "castle.webp";
-    if(productName.includes("Bernini")) return "bernini.webp";
-    return null;
-  }
-  
-  // ========== PRODUCT DATABASE WITH DYNAMIC IMAGES PER FLAVOR ==========
+  // ---------- PRODUCT DATABASE (UPDATED WITH PRICING & NEW ITEMS) ----------
+  // Base products updates (prices and modifications)
   const baseProducts = [
     { id:1, name:"4th Street", category:"Wine", flavors:["sweet white","sweet red","sweet rose"], sizes:["1L","3L"], priceMap:{"1L":50,"3L":150}, img:"4th street.png" },
     { id:2, name:"Drostdy Hof", category:"Wine", flavors:["classic"], sizes:["1L","3L"], priceMap:{"1L":52,"3L":162}, img:"drostdy hof.webp" },
@@ -186,12 +164,12 @@
     { id:22, name:"Klipdrift", category:"Spirits", flavors:["brandy"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":80}, img:"klipdrift.webp" },
     { id:23, name:"1818", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":72}, img:"1818.webp" },
     { id:24, name:"Russian Bear", category:"Spirits", flavors:["vodka"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":70}, img:"Russian beer.webp" },
-    { id:25, name:"Belgravi Gin", category:"Spirits", flavors:["gin"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":68}, img:"belgravia gin.webp" },
+    { id:25, name:"Belgravi Gin", category:"Spirits", flavors:["gin","pink"], sizes:["Medium Bottle"], priceMap:{"Medium Bottle":68,"pink":70}, img:"belgravia gin.webp" },
     { id:26, name:"Mainstay", category:"Ciders", flavors:["passion","mojito"], sizes:["440ml"], priceMap:{"440ml":22}, img:"mainstay.webp" },
     { id:27, name:"B&T", category:"Ciders", flavors:["vodka & jellybabies"], sizes:["440ml"], priceMap:{"440ml":22}, img:"b&t.webp" },
     { id:28, name:"Black Crown", category:"Ciders", flavors:["gin and tonic"], sizes:["Can"], priceMap:{"Can":25}, img:"black crown.webp" },
     { id:29, name:"Chillas Punch", category:"Ciders", flavors:["mango","sunrise","ice"], sizes:["Can"], priceMap:{"Can":26}, img:"chillas punch.webp" },
-    { id:30, name:"Corona", category:"Beer", flavors:["lager"], sizes:["330ml","410ml"], priceMap:{"330ml":22,"410ml":24}, img:"corona.webp" },
+    { id:30, name:"Corona", category:"Beer", flavors:["lager"], sizes:["330ml","410ml","600ml"], priceMap:{"330ml":22,"410ml":24,"600ml":30}, img:"corona.webp" },
     { id:31, name:"Hennessy", category:"Spirits", flavors:["cognac"], sizes:["Big Bottle"], priceMap:{"Big Bottle":650}, img:"Hennessy.png" },
     { id:32, name:"Windhoek", category:"Beer", flavors:["lager","draft"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":28,"Can":23}, img:"Windhoek.png" },
     { id:33, name:"Chateau", category:"Sparkling Wine", flavors:["rose","red","white"], sizes:["250ml"], priceMap:{"250ml":22}, img:"chateu.webp" },
@@ -199,18 +177,20 @@
     { id:35, name:"Latos", category:"Beer", flavors:["lager"], sizes:["Big Bottle"], priceMap:{"Big Bottle":45}, img:"latos.png" },
     { id:36, name:"Flying Fish", category:"Beer", flavors:["lemon"], sizes:["Big Bottle","Can"], priceMap:{"Big Bottle":27,"Can":22}, img:"flying fish.png" },
     { id:37, name:"Stella Artois", category:"Beer", flavors:["lager"], sizes:["Bottle"], priceMap:{"Bottle":25}, img:"stella.png" },
-    { id:38, name:"Avhashoni", category:"Spirits", flavors:["vodka"], sizes:["100ml","200ml","750ml"], priceMap:{"100ml":20,"200ml":35,"750ml":100}, img:"avhashoni.webp" },
-    { id:39, name:"Hansa", category:"Beer", flavors:["cort"], sizes:["Big Bottle"], priceMap:{"Big Bottle":26}, img:"hansa.webp" },
-    { id:40, name:"Bahama Punch", category:"Ciders", flavors:["watermelon","Pinacalada"], sizes:["Can"], priceMap:{"Can":28}, img:"Bahama puch.png" },
-    { id:41, name:"Gordon's", category:"Spirits", flavors:["gin"], sizes:["200ml","750ml"], priceMap:{"200ml":30,"750ml":210}, img:"gordons.webp" }
+    { id:38, name:"Avhashoni", category:"Spirits", flavors:["vodka"], sizes:["100ml","200ml","750ml"], priceMap:{"100ml":20,"200ml":35,"750ml":140}, img:"avhashoni.webp" },
+    { id:39, name:"Hansa", category:"Beer", flavors:["cort"], sizes:["Big Bottle"], priceMap:{"Big Bottle":24}, img:"hansa.webp" },
+    { id:40, name:"Bahama Punch", category:"Ciders", flavors:["watermelon","Pinacalada"], sizes:["Can"], priceMap:{"Can":26}, img:"Bahama puch.png" },
+    { id:41, name:"Gordon's", category:"Spirits", flavors:["gin"], sizes:["200ml","750ml"], priceMap:{"200ml":80,"750ml":210}, img:"gordons.webp" },
+    // NEW: Atom Harvest (Crackling)
+    { id:42, name:"Atom Harvest", category:"Sparkling Wine", flavors:["crackling rose","crackling white","crackling red"], sizes:["750ml","1.5L"], priceMap:{"750ml":45,"1.5L":82}, note:"1.5L only white & rose", img:"atom-harvest.png" }
   ];
   
-  // Castle expansion using explicit images per flavor
+  // Castle items with updated precise pricing
   const castleFlavorsMap = [
-    { flavor: "double malt", img: "doublemalt.webp" },
-    { flavor: "milk stout", img: "milkstout.webp" },
-    { flavor: "lager", img: "larger.webp" },
-    { flavor: "lite", img: "castle_lite_fallback.png" }
+    { flavor: "double malt", img: "doublemalt.webp", priceMap: {"Bottle":26,"Can":20} },
+    { flavor: "milk stout", img: "milkstout.webp", priceMap: {"Bottle":28,"Can":22} },
+    { flavor: "lager", img: "larger.webp", priceMap: {"Bottle":24,"Can":20} },
+    { flavor: "lite", img: "castle_lite_fallback.png", priceMap: {"Bottle":27,"Can":22} }
   ];
   const castleItems = castleFlavorsMap.map((item, idx) => ({
     id: 100 + idx,
@@ -218,16 +198,16 @@
     category: "Beer",
     flavors: [item.flavor],
     sizes: ["Bottle","Can"],
-    priceMap: {"Bottle":26,"Can":20},
+    priceMap: item.priceMap,
     img: item.img
   }));
   
-  // Bernini expansion with images: amber->ember, mimosa->mimosa, blush generic, classic->classic
+  // Bernini pricing: ember & mimosa = 25 each, blush and classic =23 (as originally 23 for can)
   const berniniFlavorsMap = [
-    { flavor: "amber", img: "ember.webp" },
-    { flavor: "mimosa", img: "mimosa.webp" },
-    { flavor: "blush", img: "bernini_blush_fallback.png" },
-    { flavor: "classic", img: "classic.png" }
+    { flavor: "amber", img: "ember.webp", priceVal: 25 },
+    { flavor: "mimosa", img: "mimosa.webp", priceVal: 25 },
+    { flavor: "blush", img: "bernini_blush_fallback.png", priceVal: 23 },
+    { flavor: "classic", img: "classic.png", priceVal: 23 }
   ];
   const berniniItems = berniniFlavorsMap.map((item, idx) => ({
     id: 200 + idx,
@@ -235,15 +215,20 @@
     category: "Sparkling Wine",
     flavors: [item.flavor],
     sizes: ["Can","Single"],
-    priceMap: {"Can":23,"Single":23},
+    priceMap: {"Can":item.priceVal,"Single":item.priceVal},
     img: item.img
   }));
   
   const productsData = [...baseProducts, ...castleItems, ...berniniItems];
+  
   let cart = [];
   let currentFilter = "all";
   
-  function getPrice(product, size) { return product.priceMap[size] || 20; }
+  function getPrice(product, size) { 
+    if(product.name === "Belgravi Gin" && product.flavors && product.flavors.includes("pink") && size === "pink") return 70;
+    return product.priceMap[size] || 20; 
+  }
+  
   function formatPrice(price) { return 'R ' + price.toFixed(2); }
   
   function renderProducts() {
@@ -255,39 +240,81 @@
       const defaultPrice = getPrice(product, defaultSize);
       const productImage = product.img || "https://placehold.co/400x300/1a1a1a/d4af37?text=Drink";
       const showFlavorSelect = product.flavors.length > 1;
+      // Special handling for Belgravi Gin to include pink option
+      let flavorOptions = product.flavors.map(f => `<option value="${f}">${f.charAt(0).toUpperCase()+f.slice(1)}</option>`).join('');
+      if(product.name === "Belgravi Gin" && !product.flavors.includes("pink")) flavorOptions += `<option value="pink">Pink</option>`;
+      
       return `<div class="product-card" data-product-id="${product.id}">
           <div class="product-img"><img src="${productImage}" alt="${product.name}" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1a1a1a/d4af37?text=${encodeURIComponent(product.name)}';"></div>
           <div class="product-cat">${product.category}</div>
           <div class="product-name">${product.name}</div>
-          ${showFlavorSelect ? `<select class="flavor-select" data-product-id="${product.id}" data-current-img="${productImage}">${product.flavors.map(f => `<option value="${f}">${f}</option>`).join('')}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}
+          ${showFlavorSelect || product.name === "Belgravi Gin" ? `<select class="flavor-select" data-product-id="${product.id}" data-current-img="${productImage}">${flavorOptions}</select>` : `<p style="font-size:0.85rem; color:#666; margin:8px 0;">${product.flavors[0]}</p>`}
           <select class="size-select" data-product-id="${product.id}">${product.sizes.map(s => { const price = getPrice(product, s); return `<option value="${s}" data-price="${price}">${s} - ${formatPrice(price)}</option>`; }).join('')}</select>
           <div class="product-price" id="price-${product.id}">${formatPrice(defaultPrice)}</div>
           <button class="btn add-to-cart-btn" data-product-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button>
         </div>`;
     }).join('');
     
-    // Handle flavor change: update product image based on selected flavor (for Castle/Bernini dynamic)
+    // Flavor change logic: update price for special pink gin flavor
     document.querySelectorAll('.flavor-select').forEach(select => {
       select.addEventListener('change', function(e) {
         const pid = parseInt(this.dataset.productId);
         const product = productsData.find(p => p.id === pid);
         if(!product) return;
         const selectedFlavor = this.value;
+        const sizeSelect = this.closest('.product-card')?.querySelector('.size-select');
+        if(product.name === "Belgravi Gin" && selectedFlavor === "pink") {
+          const pinkPrice = 70;
+          const currentSize = sizeSelect.value;
+          if(currentSize === "Medium Bottle") {
+            const option = sizeSelect.querySelector(`option[value="Medium Bottle"]`);
+            if(option) { option.dataset.price = pinkPrice; option.textContent = `Medium Bottle - ${formatPrice(pinkPrice)}`; }
+            const priceDiv = document.getElementById(`price-${pid}`); if(priceDiv) priceDiv.textContent = formatPrice(pinkPrice);
+          }
+        } else {
+          const defaultSize = sizeSelect.value;
+          const newPrice = getPrice(product, defaultSize);
+          const priceDiv = document.getElementById(`price-${pid}`); if(priceDiv) priceDiv.textContent = formatPrice(newPrice);
+          const option = sizeSelect.querySelector(`option[value="${defaultSize}"]`);
+          if(option) { option.dataset.price = newPrice; option.textContent = `${defaultSize} - ${formatPrice(newPrice)}`; }
+        }
+        // dynamic image update for castle/bernini
         let newImage = product.img;
         if(product.name.includes("Castle")) {
-          const specific = castleFlavorsMap.find(f => f.flavor === selectedFlavor);
-          if(specific) newImage = specific.img;
+          const match = castleFlavorsMap.find(f => f.flavor === selectedFlavor);
+          if(match) newImage = match.img;
         } else if(product.name.includes("Bernini")) {
-          const specific = berniniFlavorsMap.find(f => f.flavor === selectedFlavor);
-          if(specific) newImage = specific.img;
+          const match = berniniFlavorsMap.find(f => f.flavor === selectedFlavor);
+          if(match) newImage = match.img;
         }
         const imgContainer = this.closest('.product-card')?.querySelector('.product-img img');
-        if(imgContainer) imgContainer.src = newImage;
+        if(imgContainer && newImage) imgContainer.src = newImage;
       });
     });
     
-    document.querySelectorAll('.size-select').forEach(select => select.addEventListener('change', function(e) { const pid = parseInt(this.dataset.productId); const price = this.options[this.selectedIndex].dataset.price; const disp = document.getElementById(`price-${pid}`); if(disp) disp.textContent = formatPrice(parseFloat(price)); }));
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', function(e) { const pid = parseInt(this.dataset.productId); const card = this.closest('.product-card'); const product = productsData.find(p => p.id === pid); if(!product) return; const flavorSel = card.querySelector('.flavor-select'); const sizeSel = card.querySelector('.size-select'); const flavor = flavorSel ? flavorSel.value : product.flavors[0]; const size = sizeSel.value; const price = parseFloat(sizeSel.options[sizeSel.selectedIndex].dataset.price); const imgEl = card.querySelector('.product-img img'); const displayImg = imgEl ? imgEl.src : product.img; addToCart(product, flavor, size, price, displayImg); animateFlyToCart(this); }));
+    document.querySelectorAll('.size-select').forEach(select => select.addEventListener('change', function(e) { 
+      const pid = parseInt(this.dataset.productId); 
+      const product = productsData.find(p => p.id === pid);
+      const price = parseFloat(this.options[this.selectedIndex].dataset.price); 
+      const disp = document.getElementById(`price-${pid}`); 
+      if(disp) disp.textContent = formatPrice(price);
+    }));
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', function(e) { 
+      const pid = parseInt(this.dataset.productId); 
+      const card = this.closest('.product-card'); 
+      const product = productsData.find(p => p.id === pid); 
+      if(!product) return; 
+      const flavorSel = card.querySelector('.flavor-select'); 
+      const sizeSel = card.querySelector('.size-select'); 
+      let flavor = flavorSel ? flavorSel.value : product.flavors[0];
+      let size = sizeSel.value;
+      let price = parseFloat(sizeSel.options[sizeSel.selectedIndex].dataset.price);
+      if(product.name === "Belgravi Gin" && flavor === "pink") price = 70;
+      const imgEl = card.querySelector('.product-img img'); 
+      const displayImg = imgEl ? imgEl.src : product.img; 
+      addToCart(product, flavor, size, price, displayImg); 
+      animateFlyToCart(this); 
+    }));
   }
   
   function addToCart(product, flavor, size, price, imageUrl) {
@@ -317,7 +344,6 @@
   window.removeCartItem = function(idx) { cart.splice(idx,1); updateCartUI(); saveCart(); };
   function saveCart() { localStorage.setItem('villageBevCart', JSON.stringify(cart)); }
   function loadCart() { const saved = localStorage.getItem('villageBevCart'); if(saved) try { cart = JSON.parse(saved); } catch(e) { cart = []; } updateCartUI(); }
-  
   function animateFlyToCart(btn) { const flyer = document.getElementById('flyer'); const cartIcon = document.getElementById('cartIconTop'); if(!flyer||!cartIcon) return; const btnRect = btn.getBoundingClientRect(); const cartRect = cartIcon.getBoundingClientRect(); flyer.style.opacity='1'; flyer.style.left=btnRect.left+btnRect.width/2-20+'px'; flyer.style.top=btnRect.top+btnRect.height/2-20+'px'; flyer.style.transition='none'; requestAnimationFrame(()=>{ flyer.style.transition='all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; flyer.style.left=cartRect.left+cartRect.width/2-20+'px'; flyer.style.top=cartRect.top+cartRect.height/2-20+'px'; flyer.style.opacity='0'; flyer.style.transform='scale(0.3)'; }); setTimeout(()=>{ flyer.style.transform='scale(1)'; },600); }
   
   function initCategoryFilters() { document.querySelectorAll('.cat-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); currentFilter = this.dataset.cat; renderProducts(); })); }
@@ -338,10 +364,7 @@
     const errorDiv = document.getElementById('deliveryError');
     const name = nameInput?.value.trim() || "";
     const address = addressInput?.value.trim() || "";
-    if (!name || !address) {
-      if (errorDiv) errorDiv.style.display = "block";
-      return;
-    }
+    if (!name || !address) { if (errorDiv) errorDiv.style.display = "block"; return; }
     if (errorDiv) errorDiv.style.display = "none";
     let message = `*🧾 VILLAGE BEV ORDER SUMMARY*%0A👤 *Name:* ${name}%0A📍 *Delivery Address:* ${address}%0A%0A*🛒 YOUR ITEMS:*%0A`;
     cart.forEach(item => { message += `• ${item.quantity}x ${item.name} (${item.size}) - R${(item.price * item.quantity).toFixed(2)}%0A`; });
