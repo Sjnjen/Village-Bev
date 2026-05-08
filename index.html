@@ -356,7 +356,34 @@
   window.scrollToContent = () => { window.scrollTo({ top: window.innerHeight, behavior: 'smooth' }); };
   window.scrollToSection = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
   window.scrollToEventSection = () => { document.getElementById("party-section")?.scrollIntoView({ behavior: 'smooth' }); };
-  function sendWhatsAppOrder() { const nameInput = document.getElementById('cartCustomerName'); const addressInput = document.getElementById('cartCustomerAddress'); const errorDiv = document.getElementById('deliveryError'); const name = nameInput?.value.trim() || ""; const address = addressInput?.value.trim() || ""; if (!name || !address) { if (errorDiv) errorDiv.style.display = "block"; return; } if (errorDiv) errorDiv.style.display = "none"; let message = `*🧾 VILLAGE BEV ORDER SUMMARY*%0A👤 *Name:* ${name}%0A📍 *Delivery Address:* ${address}%0A%0A*🛒 YOUR ITEMS:*%0A`; cart.forEach(item => { message += `• ${item.quantity}x ${item.name} (${item.size}) - R${(item.price * item.quantity).toFixed(2)}%0A`; }); const total = cart.reduce((s,i)=> s+(i.price*i.quantity),0); message += `%0A*💰 TOTAL: R${total.toFixed(2)}*%0A%0A💳 *Payment:* Standard Bank 330337254 or Capitec 0764225564/1846670142. Send proof here.%0A🙏 Thank you for choosing Village Bev!`; window.open(`https://wa.me/27825934659?text=${message}`, '_blank'); }
+  
+  // UPDATED: Sends WhatsApp order to BOTH numbers with a small delay to bypass popup blocker
+  function sendWhatsAppOrder() { 
+    const nameInput = document.getElementById('cartCustomerName'); 
+    const addressInput = document.getElementById('cartCustomerAddress'); 
+    const errorDiv = document.getElementById('deliveryError'); 
+    const name = nameInput?.value.trim() || ""; 
+    const address = addressInput?.value.trim() || ""; 
+    if (!name || !address) { 
+      if (errorDiv) errorDiv.style.display = "block"; 
+      return; 
+    } 
+    if (errorDiv) errorDiv.style.display = "none"; 
+    let message = `*🧾 VILLAGE BEV ORDER SUMMARY*%0A👤 *Name:* ${name}%0A📍 *Delivery Address:* ${address}%0A%0A*🛒 YOUR ITEMS:*%0A`; 
+    cart.forEach(item => { 
+      message += `• ${item.quantity}x ${item.name} (${item.size}) - R${(item.price * item.quantity).toFixed(2)}%0A`; 
+    }); 
+    const total = cart.reduce((s,i)=> s+(i.price*i.quantity),0); 
+    message += `%0A*💰 TOTAL: R${total.toFixed(2)}*%0A%0A💳 *Payment:* Standard Bank 330337254 or Capitec 0764225564/1846670142. Send proof here.%0A🙏 Thank you for choosing Village Bev!`; 
+    
+    // First number opens immediately
+    window.open(`https://wa.me/27825934659?text=${message}`, '_blank'); 
+    
+    // Second number opens after a 300ms delay to bypass popup blocker
+    setTimeout(() => {
+      window.open(`https://wa.me/27764225564?text=${message}`, '_blank');
+    }, 300); 
+  }
   
   function init() {
     loadCart(); renderProducts(); initCategoryFilters(); renderUpcomingEvents();
